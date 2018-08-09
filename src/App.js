@@ -1,35 +1,38 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
+import React, {Component, Fragment} from 'react';
 import './App.css';
 import {connect} from "react-redux"
 import Login from "./login"
-import {Route, Switch, withRouter, Link} from 'react-router-dom' //use import { Route, Switch, withRouter } from 'react-router-dom' if needed
+import Navbar from "./Navbar"
+import Adjustment from "./Adjustment"
+import Chat from "./Chat"
+import Idea from "./Idea"
+import Item from "./Item"
+import Order from "./Order"
+import Pos from "./Pos"
+import ProfilePage from "./ProfilePage"
+import Report from "./Report"
+import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route, Switch, withRouter } from 'react-router-dom' if needed
 
 class App extends Component {
   render() {
-    return (<div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo"/>
-        <h1 className="App-title">Welcome to React</h1>
-      </header>
-      <p className="App-intro">
-        To get started, edit
-        <code>src/App.js</code>
-        and save to reload.
-      </p>
+    return (<Fragment>
+      <Route exact path="/" render={(routerProps) => <Login {...routerProps}/>}/>
       <Switch>
-        <Route path="/login" render={(routerProps) => <Login {...routerProps}/>}/>
+        <Route path="/home" component={Navbar}/>
+        <Route path="/profile" component={ProfilePage}/>
+        <Route path="/reports" component={Report}/>
+        <Route path="/pos" component={Pos}/>
+        <Route path="/items" component={Item}/>
+        <Route path="/chat" component={Chat}/>
+        <Route path="/adjustments" component={Adjustment}/>
+        <Route path="/orders" component={Order}/>
+        <Route path="/ideas" component={Idea}/>
       </Switch>
-      <Link to="/login">Login</Link>
-    </div>);
+    </Fragment>)
   }
 }
-
 function mapStateToProps(state) {
-  return {
-    // read state
-
-  }
+  return {login: state.login}
 }
 
 function mapDispatchToProps(dispatch) {
@@ -41,4 +44,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
