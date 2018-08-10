@@ -10,9 +10,9 @@ class ProfilePage extends Component {
 
 addTodoList =(data) => {
   // console.log("checking",data)
-  // console.log("username",this.props.currentUser)
+  console.log("username",this.props.currentUser)
   const user_Todolists = data.filter(todolist =>{
-    return todolist.to_username.toLowerCase() === this.props.currentUser.toLowerCase()
+    return todolist.to_username.toLowerCase() === this.props.currentUser.username.toLowerCase()
   })
   this.props.showToDoLists(user_Todolists)
 
@@ -24,13 +24,17 @@ componentDidMount(){
   )
 }
 
+handleCreateTask = () => {
+  this.props.history.push("/createtask")
+}
  render() {
-   console.log("Check to do list", this.props.toDoLists)
+   // console.log("Check to do list", this.props.toDoLists)
 return (<div>
 <Link to="/home">Home</Link>
 <Navbar />
   Hi,User!
   <h3>Task</h3>
+  <input type="button" value="Create Task" onClick={this.handleCreateTask}/>
   <ul>
     {this.props.toDoLists.map(todolist=>
       <ToDoList todolist={todolist} key={UUID()}/>

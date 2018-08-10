@@ -11,6 +11,7 @@ import Order from "./Order"
 import Pos from "./Pos"
 import ProfilePage from "./ProfilePage"
 import Report from "./Report"
+import CreateTask from "./Create_Task"
 import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route, Switch, withRouter } from 'react-router-dom' if needed
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
       <Route exact path="/" render={(routerProps) => <Login {...routerProps}/>}/>
       <Switch>
         <Route path="/home" component={Navbar}/>
-        <Route path="/profile" component={ProfilePage}/>
+        <Route path="/profile" component={(routerProps) => <ProfilePage {...routerProps}/>}/>
         <Route path="/reports" component={Report}/>
         <Route path="/pos" component={Pos}/>
         <Route path="/items" component={Item}/>
@@ -27,6 +28,7 @@ class App extends Component {
         <Route path="/adjustments" component={Adjustment}/>
         <Route path="/orders" component={Order}/>
         <Route path="/ideas" component={Idea}/>
+        <Route path="/createtask" component={CreateTask}/>
       </Switch>
     </Fragment>)
   }

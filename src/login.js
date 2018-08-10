@@ -3,10 +3,21 @@ import {connect} from 'react-redux';
 
 
 class Login extends Component {
+
+  getUserFromApi = (users) =>{
+const user=users.filter(user=>{
+  // console.log("check user",user.username)
+  // console.log("check userinput",this.props.usernameInput)
+  return user.username. === this.props.usernameInput
+})
+// console.log("here is the user",user)
+this.props.handleLogin(user[0])
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log("I will fetch data here")
-    this.props.handleLogin(this.props.usernameInput)
+    // check this
+    fetch("http://localhost:3000/api/v1/users").then(r=>r.json()).then(data=>this.getUserFromApi(data))
     this.props.history.push("/home")
   }
 
@@ -42,8 +53,8 @@ function mapDispatchToProps(dispatch) {
     handlePasswordInput: (event) => {
       dispatch({type: "LOGIN_PASSWORD", payload: event.target.value})
     },
-    handleLogin: (username) => {
-      dispatch({type: "SET_USER", payload: username})
+    handleLogin: (user) => {
+      dispatch({type: "SET_USER", payload: user})
     }
   }
 }

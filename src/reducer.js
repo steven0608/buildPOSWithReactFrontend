@@ -3,12 +3,14 @@ const defaultState = {
   usernameInput: "",
   passwordInput: "",
   login: true,
-  currentUser:"",
+  currentUser: "",
   toDoLists: [],
+  task_to:"",
+  message:"",
 }
 
 export default function(state = defaultState, action) {
-  console.log(action)
+  console.log("login state",state)
   switch (action.type) {
     case "LOGIN_USERNAME":
       return {
@@ -29,6 +31,16 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         toDoLists: action.payload
+      }
+      case "SEND_TASK_TO" :
+      return {
+        ...state,
+        task_to: action.payload
+      }
+      case "CREATE_MESSAGE" :
+      return {
+        ...state,
+        message:action.payload
       }
     default:
       return state
