@@ -7,14 +7,30 @@ class Navbar extends Component {
 
     return (<div>
       <ul>
-        <li><Link to="/profile">Profile Page</Link></li>
-        <li><Link to="/reports">Reports</Link></li>
-        <li><Link to="/pos">POS</Link></li>
-        <li><Link to="/items">Items</Link></li>
-        <li><Link to="/chat">Chat Room</Link></li>
-        <li><Link to="/adjustments">Adjustment</Link></li>
-        <li><Link to="/orders">Order</Link></li>
-        <li><Link to="/ideas">Ideas</Link></li>
+        <li>
+          <Link to="/profile">Profile Page</Link>
+        </li>
+        <li>
+          <Link to="/reports">Reports</Link>
+        </li>
+        <li>
+          <Link to="/pos">POS</Link>
+        </li>
+        <li>
+          <Link to="/items">Items</Link>
+        </li>
+        <li>
+          <Link to="/chat">Chat Room</Link>
+        </li>
+        <li>
+          <Link to="/adjustments">Adjustment</Link>
+        </li>
+        <li>
+          <Link to="/orders">Order</Link>
+        </li>
+        <li>
+          <Link to="/ideas">Ideas</Link>
+        </li>
       </ul>
     </div>)
   }

@@ -1,23 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-
 class Login extends Component {
 
-  getUserFromApi = (users) =>{
-const user=users.filter(user=>{
-  // console.log("check user",user.username)
-  // console.log("check userinput",this.props.usernameInput)
-  return user.username. === this.props.usernameInput
-})
-// console.log("here is the user",user)
-this.props.handleLogin(user[0])
+  getUserFromApi = (users) => {
+    const user = users.filter(user => {
+      // console.log("check user",user.username)
+      // console.log("check userinput",this.props.usernameInput)
+      return user.username === this.props.usernameInput
+    })
+    // console.log("here is the user",user)
+    this.props.handleLogin(user[0])
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
     // check this
-    fetch("http://localhost:3000/api/v1/users").then(r=>r.json()).then(data=>this.getUserFromApi(data))
+    fetch("http://localhost:3000/api/v1/users").then(r => r.json()).then(data => this.getUserFromApi(data))
     this.props.history.push("/home")
   }
 
@@ -37,7 +36,7 @@ function mapStateToProps(state) {
     // read state
     usernameInput: state.usernameInput,
     passwordInput: state.passwordInput,
-    currentUser:  state.currentUser,
+    currentUser: state.currentUser
   }
 }
 

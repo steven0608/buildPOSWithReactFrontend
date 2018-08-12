@@ -12,11 +12,19 @@ import Pos from "./Pos"
 import ProfilePage from "./ProfilePage"
 import Report from "./Report"
 import CreateTask from "./Create_Task"
+import CreateUser from "./Create_user"
 import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route, Switch, withRouter } from 'react-router-dom' if needed
 
+// beautify has issue with exact path
+
 class App extends Component {
+
+  componentDidMount(){
+    console.log("testing")
+  }
   render() {
     return (<Fragment>
+
       <Route exact path="/" render={(routerProps) => <Login {...routerProps}/>}/>
       <Switch>
         <Route path="/home" component={Navbar}/>
@@ -29,6 +37,7 @@ class App extends Component {
         <Route path="/orders" component={Order}/>
         <Route path="/ideas" component={Idea}/>
         <Route path="/createtask" component={CreateTask}/>
+        <Route path="/createuser" component={CreateUser}/>
       </Switch>
     </Fragment>)
   }

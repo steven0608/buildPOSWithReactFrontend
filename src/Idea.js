@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
 import Navbar from "./Navbar"
- class Idea extends Component {
+class Idea extends Component {
 
- render() {
+  render() {
 
-return ( <div>
-  <Link to="/home">Home</Link>
-  <Navbar />
-  Hi,User!
-</div>)
- }
- }
+    return (<div>
+      <Link to="/home">Home</Link>
+      <Navbar/>
+      Hi,User!
+    </div>)
+  }
+}
 
+function mapStateToProps() {}
 
- function mapStateToProps() {
+function mapDispatchToProps() {}
 
- }
-
- function mapDispatchToProps() {
-
- }
-
- export default connect(mapStateToProps,mapDispatchToProps)(Idea)
+export default connect(mapStateToProps, mapDispatchToProps)(Idea)
