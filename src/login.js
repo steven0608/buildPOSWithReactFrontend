@@ -9,7 +9,7 @@ class Login extends Component {
       // console.log("check userinput",this.props.usernameInput)
       return user.username === this.props.usernameInput
     })
-    // console.log("here is the user",user)
+    // console.log("here is the user",user[0])
     this.props.handleLogin(user[0])
   }
 

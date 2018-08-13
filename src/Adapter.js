@@ -12,4 +12,17 @@ export default class Adapter {
       body: JSON.stringify(submissionBody)
     })
   }
+
+  static deleteRequest(url,method) {
+    return fetch(url, {
+      Accept: "application/json",
+      method: method,
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+  }
+
+
+
 }

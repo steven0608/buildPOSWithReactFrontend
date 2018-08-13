@@ -19,11 +19,11 @@ class ProfilePage extends Component {
     // console.log("to do List", user_Todolists)
   }
   componentDidMount() {
-    console.log("not sure if this run again")
     fetch("http://localhost:3000//api/v1/todolists").then(r => r.json()).then(data => this.addTodoList(data))
   }
 
   handleCreateTask = () => {
+
     this.props.history.push("/createtask")
   }
 
@@ -31,6 +31,9 @@ class ProfilePage extends Component {
     this.props.history.push("/createuser")
   }
 
+  handleAllTasks = () => {
+    this.props.history.push("/alltasks")
+  }
   render() {
     // console.log("Check to do list", this.props.toDoLists)
     return (<div>
@@ -41,6 +44,7 @@ class ProfilePage extends Component {
       <h3>Task</h3>
       <input type="button" value="Create New Task" onClick={this.handleCreateTask}/>
       <input type="button" value="Create New User" onClick={this.handleCreateUser}/>
+      <input type="button" value="Tasks Created" onClick={this.handleAllTasks}/>
 
       <ul>
         {this.props.toDoLists.map(todolist => <ToDoList todolist={todolist} key={UUID()}/>)}

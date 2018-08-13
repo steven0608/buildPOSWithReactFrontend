@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import './App.css';
+// import "./normalize.css"
+import "./style.css"
 import {connect} from "react-redux"
 import Login from "./login"
 import Navbar from "./Navbar"
@@ -13,14 +15,19 @@ import ProfilePage from "./ProfilePage"
 import Report from "./Report"
 import CreateTask from "./Create_Task"
 import CreateUser from "./Create_user"
+import AllTasks from "./AllTasks"
+import CreateNewItem from "./CreateNewItem"
 import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route, Switch, withRouter } from 'react-router-dom' if needed
 
 // beautify has issue with exact path
 
 class App extends Component {
 
+getAllProducts =(data)=> {
+  this.props.fetchAllProducts(data)
+}
   componentDidMount(){
-    console.log("testing")
+    fetch("http://localhost:3000/api/v1/products").then(r=>r.json()).then(data=>this.getAllProducts(data))
   }
   render() {
     return (<Fragment>
@@ -38,6 +45,8 @@ class App extends Component {
         <Route path="/ideas" component={Idea}/>
         <Route path="/createtask" component={CreateTask}/>
         <Route path="/createuser" component={CreateUser}/>
+        <Route path="/alltasks" component={AllTasks}/>
+        <Route path="/createnewitems" component={CreateNewItem}/>
       </Switch>
     </Fragment>)
   }
@@ -48,10 +57,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    //setState use callback function
-    // addHeads: (data) => {
-    //   dispatch({type: "ADD_HEADS", payload: data})
-    // } it will be this.props.addHeads() instead of setState({})
+    fetchAllProducts: (data) => {
+      dispatch({type: "GET_ALL_PRODUCTS", payload: data})
+    },
   }
 }
 

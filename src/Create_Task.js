@@ -13,6 +13,9 @@ class CreateTask extends Component {
       to_username:this.props.task_to,
       task_completed:false
     }
+    const createdTasks=this.props.currentUser.todolists
+    createdTasks.push(submissionBody)
+    this.props.addCurrentUserTask({...this.props.currentUser,currentUser:createdTasks})
     const url="http://localhost:3000/api/v1/todolists"
     this.props.handleResetTaskToInput()
     this.props.handleResetTaskMessageInput()
@@ -60,6 +63,9 @@ function mapDispatchToProps(dispatch) {
     handleResetTaskMessageInput: () => {
       dispatch({type: "RESET_TASK_MESSAGE_INPUT"})
     },
+    addCurrentUserTask: (task)=> {
+      dispatch({type: "ADD_TASK_TO_CURRENT_USER", payload:task})
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTask)
