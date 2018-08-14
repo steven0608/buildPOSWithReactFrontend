@@ -29,11 +29,16 @@ const defaultState = {
   category:"",
   image_url:"",
   barcode:"",
+  currentTransactionId:"",
+  checkoutItemInput:"",
+  checkoutItems:[],
+  checkoutTotalDollar:"",
+  checkoutTotalSaving:"",
 }
 
 
 export default function(state = defaultState, action) {
-console.log("login state", defaultState)
+// console.log("login state", defaultState)
   switch (action.type) {
     case "LOGIN_USERNAME":
       return {
@@ -219,6 +224,38 @@ console.log("login state", defaultState)
     return {
       ...state,
       allProducts:[...state.allProducts,action.payload]
+    }
+    case "ADD_TRANSACTION_ID":
+    return{
+      ...state,
+      currentTransactionId:action.payload
+    }
+    case "CHECKOUT_ITEM_INPUT":
+    return{
+      ...state,
+      checkoutItemInput:action.payload,
+    }
+    case "ADD_CHECKOUT_ITEM":
+    return{
+      ...state,
+      checkoutItems:[
+        ...state.checkoutItems,
+        action.payload]
+    }
+    case "ADD_TOTAL_DOLLARS":
+    return{
+      ...state,
+      checkoutItems:action.payload,
+    }
+    case "TOTAL_CHECKOUT_DOLLARS":
+    return {
+      ...state,
+      checkoutTotalDollar:action.payload,
+    }
+    case "TOTAL_CHECKOUT_SAVING":
+    return {
+      ...state,
+      checkoutTotalSaving:action.payload,
     }
     default:
       return state

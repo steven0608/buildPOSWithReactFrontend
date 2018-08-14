@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import './App.css';
-// import "./normalize.css"
 import "./style.css"
 import {connect} from "react-redux"
 import Login from "./login"
