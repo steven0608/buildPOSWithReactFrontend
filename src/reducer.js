@@ -35,6 +35,10 @@ const defaultState = {
   checkoutTotalSaving:"",
   processCheckout:false,
   customerPay:"",
+  allSalesData:"",
+  reportData:[],
+  dateRangeFrom:"",
+  dateRangeTo:"",
 }
 
 
@@ -288,10 +292,30 @@ export default function(state = defaultState, action) {
       ...state,
       processCheckout:false,
     }
-    case "HANDLE_CUSTOMER_PAY":
+    case "RESET_CUSTOMER_PAY":
     return{
       ...state,
       customerPay:"",
+    }
+    case "GET_ALL_SALES_DATA":
+    return{
+      ...state,
+      allSalesData:action.payload,
+    }
+    case "CHANGE_DATE_RANGE_FROM":
+    return{
+      ...state,
+      dateRangeFrom:action.payload,
+    }
+    case "CHANGE_DATE_RANGE_TO":
+    return{
+      ...state,
+      dateRangeTo:action.payload,
+    }
+    case "FILTER_SALES_DATA":
+    return{
+      ...state,
+      reportData:action.payload,
     }
     default:
       return state

@@ -21,6 +21,9 @@ fetch("http://localhost:3000/api/v1/sales_transcations").then(r=>r.json()).then(
       qty:item.checkoutqty,
       total:item.totalDollars,
       total_saving:item.totalSavings,
+      product_name:item.item_name,
+      retail_price:item.retail_price,
+      pomo_price:item.pomo_price
     }
 return Adapter.fetchRequest(url,submissionBody,"POST")
   })
@@ -41,14 +44,6 @@ return Adapter.fetchRequest(url,submissionBody,"POST")
 })
 
 }
-
-
-
-
-
-
-
-
 
   function handlePaymentInput(event) {
     props.handleCustomerPay(event.target.value)
@@ -110,7 +105,7 @@ return{
     dispatch({type: "RESET_PROCESS_CHECKOUT"})
   },
   resetCustomerPay: () =>{
-    dispatch({type: "HANDLE_CUSTOMER_PAY"})
+    dispatch({type: "RESET_CUSTOMER_PAY"})
   },
 }
 }

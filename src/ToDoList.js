@@ -16,7 +16,7 @@ function handleTaskCompleted(){
     props.toDoLists[props.toDoLists.indexOf(props.todolist)].task_completed=!props.todolist.task_completed
     const user_todolist=props.currentUser.todolists.find(toDoList => toDoList.id === props.todolist.id)
     if(user_todolist){
-      props.currentUser.todolists[props.currentUser.todolists.indexOf(user_todolist)].task_completed=props.todolist.task_completed
+      props.currentUser.todolists[props.currentUser.todolists.indexOf(user_todolist)].task_completed=props.toDoLists[props.toDoLists.indexOf(props.todolist)].task_completed
       props.updateUserToDoLists(props.currentUser)
     }
 
@@ -42,7 +42,7 @@ function handleTaskCompleted(){
         color: "#ff0000"
       }
 } >
-    Task From {props.todolist.create_by}: {props.todolist.message} {props.name ? null : <button id={props.todolist.id} style={props.todolist.task_completed
+    Task From {props.todolist.create_by} To {props.todolist.to_username} :{props.todolist.message} {props.name ? null : <button id={props.todolist.id} style={props.todolist.task_completed
         ? {
           color: "#000066"
         }

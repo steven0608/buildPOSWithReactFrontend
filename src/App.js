@@ -22,11 +22,15 @@ import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route,
 
 class App extends Component {
 
+getAllSalesData = (data) => {
+  this.props.fetchAllSalesData(data)
+}
 getAllProducts =(data)=> {
   this.props.fetchAllProducts(data)
 }
   componentDidMount(){
     fetch("http://localhost:3000/api/v1/products").then(r=>r.json()).then(data=>this.getAllProducts(data))
+    fetch("http://localhost:3000/api/v1/sales_transcations").then(r=>r.json()).then(data=>this.getAllSalesData(data))
   }
   render() {
     return (<Fragment>
@@ -59,6 +63,9 @@ function mapDispatchToProps(dispatch) {
     fetchAllProducts: (data) => {
       dispatch({type: "GET_ALL_PRODUCTS", payload: data})
     },
+    fetchAllSalesData: (data) => {
+      dispatch({type: "GET_ALL_SALES_DATA", payload: data})
+    }
   }
 }
 
