@@ -16,24 +16,6 @@ class ProductSale extends Component {
         this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalDollars=this.props.checkoutItem.retail_price*qtyInput
         this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalSavings=(this.props.checkoutItem.retail_price-this.props.checkoutItem.pomo_price)*qtyInput
         this.props.addTotal(this.props.checkoutItems)
-
-         let initialTotalDollar=0
-         let totalCheckoutDollars = this.props.checkoutItems.reduce(function (acc,cur) {
-           return acc+cur.totalDollars
-         },initialTotalDollar)
-         console.log("check total",totalCheckoutDollars)
-         // this.props.addtotalDollars(totalCheckoutDollars)
-
-
-
-       // this.props.addtotalDollars(totalCheckoutDollars)
-
-       // let initialTotalSaving=0
-       // let totalCheckoutSavings = this.props.checkoutItems.reduce(function (acc,cur) {
-       //   return acc+cur.totalSavings
-       // },initialTotalSaving)
-       // this.props.addtotalSavings(totalCheckoutSavings)
-
    }
 
  render() {
@@ -59,12 +41,6 @@ return (<tr>
  return{
    addTotal: (checkoutItems) =>{
      dispatch({type: "ADD_TOTAL_DOLLARS", payload: checkoutItems})
-   },
-   addtotalDollars:(totalCheckout) =>{
-     dispatch({type: "TOTAL_CHECKOUT_DOLLARS", payload: totalCheckout})
-   },
-   addtotalSavings:(totalSaving) =>{
-     dispatch({type: "TOTAL_CHECKOUT_SAVING", payload: totalSaving})
    },
  }
  }

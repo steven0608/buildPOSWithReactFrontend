@@ -29,11 +29,12 @@ const defaultState = {
   category:"",
   image_url:"",
   barcode:"",
-  currentTransactionId:"",
   checkoutItemInput:"",
   checkoutItems:[],
   checkoutTotalDollar:"",
   checkoutTotalSaving:"",
+  processCheckout:false,
+  customerPay:"",
 }
 
 
@@ -225,11 +226,6 @@ export default function(state = defaultState, action) {
       ...state,
       allProducts:[...state.allProducts,action.payload]
     }
-    case "ADD_TRANSACTION_ID":
-    return{
-      ...state,
-      currentTransactionId:action.payload
-    }
     case "CHECKOUT_ITEM_INPUT":
     return{
       ...state,
@@ -256,6 +252,46 @@ export default function(state = defaultState, action) {
     return {
       ...state,
       checkoutTotalSaving:action.payload,
+    }
+    case "CHECKOUT":
+    return {
+      ...state,
+      processCheckout:!state.processCheckout
+    }
+    case "HANDLE_CUSTOMER_PAY":
+    return{
+      ...state,
+      customerPay:action.payload,
+    }
+    case "RESET_INPUT":
+    return{
+      ...state,
+      checkoutItemInput:"",
+    }
+    case "RESET_CHECKOUT_ITEMS":
+    return{
+      ...state,
+      checkoutItems:[],
+    }
+    case "RESET_CHECKOUT_TOTAL":
+    return{
+      ...state,
+      checkoutTotalDollar:"",
+    }
+    case "RESET_CHECKOUT_SAVING":
+    return{
+      ...state,
+      checkoutTotalSaving:"",
+    }
+    case "RESET_PROCESS_CHECKOUT":
+    return{
+      ...state,
+      processCheckout:false,
+    }
+    case "HANDLE_CUSTOMER_PAY":
+    return{
+      ...state,
+      customerPay:"",
     }
     default:
       return state
