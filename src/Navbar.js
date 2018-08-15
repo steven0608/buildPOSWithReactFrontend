@@ -28,12 +28,14 @@ class Navbar extends Component {
         <li>
           <Link to="/orders">Order</Link>
         </li>
-        <li>
-          <Link to="/ideas">Ideas</Link>
-        </li>
       </ul>
     </div>)
   }
 }
 
 export default Navbar
+
+
+// <li>
+//   <Link to="/ideas">Ideas</Link>
+// </li>

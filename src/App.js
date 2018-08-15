@@ -6,7 +6,8 @@ import Login from "./login"
 import Navbar from "./Navbar"
 import Adjustment from "./Adjustment"
 import Chat from "./Chat"
-import Idea from "./Idea"
+// import Idea from "./Idea"
+// <Route path="/ideas" component={Idea}/>
 import Item from "./Item"
 import Order from "./Order"
 import Pos from "./Pos"
@@ -22,15 +23,15 @@ import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route,
 
 class App extends Component {
 
-getAllSalesData = (data) => {
-  this.props.fetchAllSalesData(data)
-}
-getAllProducts =(data)=> {
-  this.props.fetchAllProducts(data)
-}
-  componentDidMount(){
-    fetch("http://localhost:3000/api/v1/products").then(r=>r.json()).then(data=>this.getAllProducts(data))
-    fetch("http://localhost:3000/api/v1/sales_transcations").then(r=>r.json()).then(data=>this.getAllSalesData(data))
+  getAllSalesData = (data) => {
+    this.props.fetchAllSalesData(data)
+  }
+  getAllProducts = (data) => {
+    this.props.fetchAllProducts(data)
+  }
+  componentDidMount() {
+    fetch("http://localhost:3000/api/v1/products").then(r => r.json()).then(data => this.getAllProducts(data))
+    fetch("http://localhost:3000/api/v1/sales_transcations").then(r => r.json()).then(data => this.getAllSalesData(data))
   }
   render() {
     return (<Fragment>
@@ -45,7 +46,6 @@ getAllProducts =(data)=> {
         <Route path="/chat" component={Chat}/>
         <Route path="/adjustments" component={Adjustment}/>
         <Route path="/orders" component={Order}/>
-        <Route path="/ideas" component={Idea}/>
         <Route path="/createtask" component={CreateTask}/>
         <Route path="/createuser" component={CreateUser}/>
         <Route path="/alltasks" component={AllTasks}/>

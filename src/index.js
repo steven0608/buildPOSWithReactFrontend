@@ -9,8 +9,6 @@ import {createStore} from "redux"
 import {BrowserRouter as Router} from 'react-router-dom'
 import firebase from 'firebase';
 
-
-
 const config = {
   apiKey: "AIzaSyDjwvaMWwluwPZIHQFD9h4M995idDVtKHs",
   authDomain: "mod5project-35643.firebaseapp.com",

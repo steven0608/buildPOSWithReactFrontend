@@ -7,19 +7,22 @@ class CreateTask extends Component {
   handleCreateTaskSubmit = (event) => {
     event.preventDefault()
     let submissionBody = {
-      user_id:this.props.currentUser.id,
-      message:this.props.message,
-      create_by:this.props.currentUser.username,
-      to_username:this.props.task_to,
-      task_completed:false
+      user_id: this.props.currentUser.id,
+      message: this.props.message,
+      create_by: this.props.currentUser.username,
+      to_username: this.props.task_to,
+      task_completed: false
     }
-    const createdTasks=this.props.currentUser.todolists
+    const createdTasks = this.props.currentUser.todolists
     createdTasks.push(submissionBody)
-    this.props.addCurrentUserTask({...this.props.currentUser,currentUser:createdTasks})
-    const url="http://localhost:3000/api/v1/todolists"
+    this.props.addCurrentUserTask({
+      ...this.props.currentUser,
+      currentUser: createdTasks
+    })
+    const url = "http://localhost:3000/api/v1/todolists"
     this.props.handleResetTaskToInput()
     this.props.handleResetTaskMessageInput()
-    Adapter.fetchRequest(url,submissionBody,"POST").then(()=>this.props.history.push("/profile"))
+    Adapter.fetchRequest(url, submissionBody, "POST").then(() => this.props.history.push("/profile"))
 
   }
 
@@ -28,9 +31,7 @@ class CreateTask extends Component {
     return (<div>
       <h2>Create a task for your team member</h2>
       <div>Selected Member:</div>
-      <ul>
-
-      </ul>
+      <ul></ul>
       <form onSubmit={this.handleCreateTaskSubmit}>
         <label>Task To:<input type="text" value={this.props.task_to} onChange={(event) => this.props.handleTaskToInput(event)}/></label>
         <label>Message<input type="text" value={this.props.message} onChange={(event) => this.props.handleCreateTaskMessageInput(event)}/></label>
@@ -42,7 +43,7 @@ class CreateTask extends Component {
 }
 
 function mapStateToProps(state) {
-  return {task_to: state.task_to, message: state.message,currentUser: state.currentUser}
+  return {task_to: state.task_to, message: state.message, currentUser: state.currentUser}
 }
 
 function mapDispatchToProps(dispatch) {
@@ -63,8 +64,8 @@ function mapDispatchToProps(dispatch) {
     handleResetTaskMessageInput: () => {
       dispatch({type: "RESET_TASK_MESSAGE_INPUT"})
     },
-    addCurrentUserTask: (task)=> {
-      dispatch({type: "ADD_TASK_TO_CURRENT_USER", payload:task})
+    addCurrentUserTask: (task) => {
+      dispatch({type: "ADD_TASK_TO_CURRENT_USER", payload: task})
     }
   }
 }

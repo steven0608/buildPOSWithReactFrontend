@@ -2,7 +2,46 @@ import React, {Component} from 'react';
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
 import Navbar from "./Navbar"
+import Adapter from "./Adapter"
+
+
 class Order extends Component {
+
+
+  createOpenOrder=(event)=> {
+    event.preventDefault()
+    const url="http://localhost:3000/api/v1/orders"
+    const submissionBody={
+      product_id:this.props.orderProduct.id,
+      product_name:this.props.orderProduct.item_name,
+      qty:this.props.orderQty,
+      price:this.props.orderPrice,
+      vendor_name:this.props.orderVendor,
+      user_id:this.props.currentUser.id,
+      order_by:this.props.currentUser.username,
+      on_order:true,
+      received:false,
+      received_by:"Not Yet",
+      totalDollars:this.props.orderPrice*this.props.orderQty,
+    }
+    Adapter.fetchRequest(url,submissionBody,"POST").then(()=>{
+      this.props.createOrderProduct("")
+      this.props.searchBarcodeOrder("")
+      this.props.placeOrderQTY("")
+      this.props.placeOrderPrice("")
+      this.props.placeOrderVendor("")
+    })
+
+  }
+  handleBarcode = (event)=>{
+    this.props.searchBarcodeOrder(event.target.value)
+    const orderProduct=this.props.allProducts.find(product=>product.barcode === parseInt(event.target.value))
+    if(orderProduct){
+      this.props.createOrderProduct(orderProduct)
+    }else{
+      this.props.createOrderProduct("")
+    }
+  }
 
   render() {
 
@@ -10,12 +49,54 @@ class Order extends Component {
       <Link to="/home">Home</Link>
       <Navbar/>
       Hi,User!
+      <h1>Create Order</h1>
+      <form onSubmit={this.createOpenOrder}>
+      <label>Barcode:<input type="text" value={this.props.orderBarcode} onChange={this.handleBarcode} /></label><br></br>
+      <p><img src={this.props.orderProduct.image_url} alt=""/></p>
+      <p>Product ID:{this.props.orderProduct.id}</p>
+      <p>Product Name:{this.props.orderProduct.item_name}</p>
+      <label>Quantity:<input type="text" value={this.props.orderQty} onChange={(event)=>this.props.placeOrderQTY(event.target.value)} /></label><br></br>
+      <label>Price:<input type="text" value={this.props.orderPrice} onChange={(event)=>this.props.placeOrderPrice(event.target.value)} /></label><br></br>
+      <p>Total Dollars:{this.props.orderQty*this.props.orderPrice}</p>
+      <label>Vendor Name:<input type="text" value={this.props.orderVendor} onChange={(event)=>this.props.placeOrderVendor(event.target.value)} /></label><br></br>
+      <input type="submit" value="Create Open Order"/>
+      </form>
     </div>)
   }
 }
 
-function mapStateToProps() {}
+function mapStateToProps(state) {
+  return{
+    allProducts:state.allProducts,
+    orderProduct:state.orderProduct,
+    orderBarcode:state.orderBarcode,
+    orderQty:state.orderQty,
+    orderPrice:state.orderPrice,
+    orderVendor:state.orderVendor,
+    currentUser:state.currentUser,
+  }
+}
 
-function mapDispatchToProps() {}
+function mapDispatchToProps(dispatch) {
+return{
+  createOrderProduct: (data) => {
+    dispatch({type: "CREATE_ORDER_PRODUCT", payload: data})
+  },
+  searchBarcodeOrder: (data) => {
+    dispatch({type: "SEARCH_BARCODE", payload: data})
+  },
+
+  placeOrderQTY: (data) => {
+    dispatch({type: "PLACE_ORDER_QTY", payload: data})
+  },
+  placeOrderPrice: (data) => {
+    dispatch({type: "PLACE_ORDER_PRICE", payload: data})
+  },
+  placeOrderVendor: (data) => {
+    dispatch({type: "PLACE_ORDER_VENDOR", payload: data})
+  },
+}
+
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order)

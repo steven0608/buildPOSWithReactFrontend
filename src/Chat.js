@@ -55,7 +55,7 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    
+
     const posUser = this.props.currentUser.username
 
     const chatkit = new MYChatkit({instanceLocator, key});
@@ -106,8 +106,8 @@ class Chat extends Component {
 
   render() {
     return (<div className="app">
-    <Link to="/home">Home</Link>
-    <Navbar/>
+      <Link to="/home">Home</Link>
+      <Navbar/>
       <RoomList subscribeToRoom={this.subscribeToRoom} rooms={[
           ...this.state.joinableRooms,
           ...this.state.joinedRooms
@@ -120,8 +120,6 @@ class Chat extends Component {
 }
 
 function mapStateToProps(state) {
-  return{
-    currentUser: state.currentUser,
-  }
+  return {currentUser: state.currentUser}
 }
 export default connect(mapStateToProps)(Chat)

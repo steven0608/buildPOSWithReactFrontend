@@ -1,8 +1,7 @@
-
 export default class Adapter {
 
   // fetch for "POST" & "PUT"
-  static fetchRequest(url,submissionBody,method) {
+  static fetchRequest(url, submissionBody, method) {
     return fetch(url, {
       Accept: "application/json",
       method: method,
@@ -13,7 +12,7 @@ export default class Adapter {
     })
   }
 
-  static deleteRequest(url,method) {
+  static deleteRequest(url, method) {
     return fetch(url, {
       Accept: "application/json",
       method: method,
@@ -22,7 +21,5 @@ export default class Adapter {
       }
     })
   }
-
-
 
 }

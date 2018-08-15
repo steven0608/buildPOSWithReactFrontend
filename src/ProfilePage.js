@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 import ToDoList from "./ToDoList"
 import UUID from "uuid"
 
-
 class ProfilePage extends Component {
 
   addTodoList = (data) => {
