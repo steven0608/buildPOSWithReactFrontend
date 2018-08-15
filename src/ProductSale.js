@@ -11,7 +11,7 @@ class ProductSale extends Component {
     const qtyInput = parseInt(event.target.value)
     this.setState({userInput: qtyInput})
     this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].checkoutqty = qtyInput
-    this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalDollars = this.props.checkoutItem.retail_price * qtyInput
+    this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalDollars = this.props.checkoutItem.pomo_price * qtyInput
     this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalSavings = (this.props.checkoutItem.retail_price - this.props.checkoutItem.pomo_price) * qtyInput
     this.props.addTotal(this.props.checkoutItems)
   }
@@ -20,7 +20,7 @@ class ProductSale extends Component {
     // console.log("check input",this.props.checkoutItem)
     return (<tr>
       <td>{this.props.checkoutItem.item_name}</td>
-      <td><input type="number" value={this.state.userInput} onChange={this.handleQtyInput}/></td>
+      <td><input type="number" value={this.props.checkoutItem.checkoutqty} onChange={this.handleQtyInput}/></td>
       <td>{this.props.checkoutItem.retail_price}</td>
       <td>{this.props.checkoutItem.pomo_price}</td>
       <td>{this.props.checkoutItem.totalDollars}</td>
@@ -30,7 +30,7 @@ class ProductSale extends Component {
 }
 
 function mapStateToProps(state) {
-  return {checkoutItems: state.checkoutItems}
+  return {checkoutItems: state.checkoutItems,}
 }
 
 function mapDispatchToProps(dispatch) {
