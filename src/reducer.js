@@ -48,6 +48,18 @@ const defaultState = {
   adjustmentBarcode:"",
   adjustmentQty:"",
   adjustmenntReasonCode:"",
+  allProductsSales:[],
+  allAdjustments:[],
+  allOrders:[],
+
+  filterOrders:[],
+  filterOption:"",
+  ordersSearchInput:"",
+  productOrderRadio:"",
+  productOrdersSearchInput:"",
+  productOrdersListing:[],
+
+
 
 
 
@@ -382,6 +394,65 @@ export default function(state = defaultState, action) {
         ...state,
         adjustmenntReasonCode: action.payload,
       }
+
+      case "GET_ALL_PRODUCTS_SALES":
+      return{
+        ...state,
+        allProductsSales: action.payload,
+      }
+      case "GET_ALL_ADJUSTMENTS":
+      return{
+        ...state,
+        allAdjustments: action.payload,
+      }
+      case "GET_ALL_ORDERS":
+      return{
+        ...state,
+        allOrders: action.payload,
+      }
+
+      case "ORDER_RADIO_BUTTON":
+      return{
+        ...state,
+        filterOption: action.payload,
+      }
+      case "SEARCH_ORDER_INPUT":
+      return{
+        ...state,
+        ordersSearchInput: action.payload,
+      }
+      case "FILTER_ORDERS_LIST":
+      return{
+        ...state,
+        filterOrders: action.payload,
+      }
+
+      case "UPDATE_FILTER_ORDERS":
+      return{
+        ...state,
+        filterOrders: action.payload,
+      }
+      case "UPDATE_ALL_ORDERS":
+      return{
+        ...state,
+        allOrders: action.payload,
+      }
+      case "PRODUCT_ORDER_RADIO_INPUT":
+      return{
+        ...state,
+        productOrderRadio:action.payload,
+      }
+      case "PRODUCT_ORDER_SEARCH_INPUT":
+      return{
+        ...state,
+        productOrdersSearchInput:action.payload,
+      }
+      case "PRODUCT_ORDER_LISTING":
+      return{
+        ...state,
+        productOrdersListing:action.payload,
+      }
+
     default:
       return state
   }

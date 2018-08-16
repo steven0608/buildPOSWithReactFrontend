@@ -7,7 +7,8 @@ import reducer from "./reducer"
 import {Provider} from "react-redux"
 import {createStore} from "redux"
 import {BrowserRouter as Router} from 'react-router-dom'
-import firebase from 'firebase';
+import firebase from "firebase/app"
+import "firebase/storage"
 
 const config = {
   apiKey: "AIzaSyDjwvaMWwluwPZIHQFD9h4M995idDVtKHs",

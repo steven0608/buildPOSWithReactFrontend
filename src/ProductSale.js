@@ -8,6 +8,7 @@ class ProductSale extends Component {
 
   handleQtyInput = (event) => {
     // const item=this.props.checkoutItems.find(checkoutItem=>checkoutItem.id === this.props.checkoutItem.id)
+    // eslint-disable-next-line 
     const qtyInput = parseInt(event.target.value)
     this.setState({userInput: qtyInput})
     this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].checkoutqty = qtyInput

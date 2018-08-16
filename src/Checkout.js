@@ -26,6 +26,13 @@ const Checkout = (props) => {
           retail_price: item.retail_price,
           pomo_price: item.pomo_price
         }
+        const productUrl="http://localhost:3000/api/v1/products/"+item.id
+        let productSubmissionBody = {
+          inventory:item.inventory-item.checkoutqty,
+          sales:item.sales+item.checkoutqty
+        }
+      
+        Adapter.fetchRequest(productUrl, productSubmissionBody, "PATCH")
         return Adapter.fetchRequest(url, submissionBody, "POST")
       })
       const transcationUrl = "http://localhost:3000/api/v1/sales_transcations/" + currentTransactionId

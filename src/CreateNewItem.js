@@ -2,7 +2,8 @@ import React from 'react';
 import Adapter from "./Adapter"
 import {connect} from "react-redux"
 import UUID from "uuid"
-import firebase from 'firebase';
+import firebase from "firebase/app"
+import "firebase/storage"
 
 const CreateNewItem = (props) => {
 
@@ -113,7 +114,7 @@ const CreateNewItem = (props) => {
       <br></br>
       <input type="submit" value="Create New Item"/>
     </form>
-    <img id="preview" src={props.image_url} alt="Please Click Upload"/>
+    <img id="preview" src={props.image_url} height="222" width="332" alt="Please Click Upload"/>
   </div>)
 
 }

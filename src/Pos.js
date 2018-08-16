@@ -33,6 +33,7 @@ class Pos extends Component {
 
   handleAddToCart = (event) => {
     event.preventDefault()
+    // eslint-disable-next-line 
     const addedItem = this.props.allProducts.find(product => product.barcode == this.props.checkoutItemInput || product.item_name === this.props.checkoutItemInput)
     // debugger;
     if (addedItem && this.props.checkoutItems.indexOf(addedItem) === -1) {

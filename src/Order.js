@@ -7,6 +7,9 @@ import Adapter from "./Adapter"
 
 class Order extends Component {
 
+  handleSeeAllOrders = (event)=>{
+    this.props.history.push("/allorders")
+  }
 
   createOpenOrder=(event)=> {
     event.preventDefault()
@@ -35,6 +38,7 @@ class Order extends Component {
   }
   handleBarcode = (event)=>{
     this.props.searchBarcodeOrder(event.target.value)
+    // eslint-disable-next-line 
     const orderProduct=this.props.allProducts.find(product=>product.barcode === parseInt(event.target.value))
     if(orderProduct){
       this.props.createOrderProduct(orderProduct)
@@ -49,6 +53,7 @@ class Order extends Component {
       <Link to="/home">Home</Link>
       <Navbar/>
       Hi,User!
+      <input type="button" value="See All Orders" onClick={this.handleSeeAllOrders}/>
       <h1>Create Order</h1>
       <form onSubmit={this.createOpenOrder}>
       <label>Barcode:<input type="text" value={this.props.orderBarcode} onChange={this.handleBarcode} /></label><br></br>
