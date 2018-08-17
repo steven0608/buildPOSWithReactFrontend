@@ -20,6 +20,7 @@ import CreateNewItem from "./CreateNewItem"
 import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route, Switch, withRouter } from 'react-router-dom' if needed
 import SeeAllOrders from "./SeeAllOrders"
 import ProductOrdersList from "./ProductOrdersList"
+import EditProduct from "./EditProduct"
 
 // beautify has issue with exact path
 
@@ -70,9 +71,17 @@ class App extends Component {
         <Route path="/allorders" component={SeeAllOrders}/>
         <Route path="/products/:id/orders" render={(routerProps) => {
 							let id = routerProps.match.params.id
+              // eslint-disable-next-line
 							let ordersList = this.props.allOrders.filter(order => order.product_id === parseInt(id))
 							return <ProductOrdersList {...routerProps} orders={ordersList}/>
 						}}/>
+
+        <Route path="/products/:id/edit" render={(routerProps) => {
+    							let id = routerProps.match.params.id
+                  // eslint-disable-next-line
+    							let product = this.props.allProducts.find(product => product.id === parseInt(id))
+    							return <EditProduct {...routerProps} product={product}/>
+    						}}/>
 
       </Switch>
     </Fragment>)
@@ -81,6 +90,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {login: state.login,
   allOrders:state.allOrders,
+  allProducts:state.allProducts,
 }
 }
 

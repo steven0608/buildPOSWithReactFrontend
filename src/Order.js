@@ -25,21 +25,26 @@ class Order extends Component {
       on_order:true,
       received:false,
       received_by:"Not Yet",
-      totalDollars:this.props.orderPrice*this.props.orderQty,
+      total_dollars:this.props.orderPrice*this.props.orderQty,
     }
+    this.props.addNewOrder(submissionBody)
+
     Adapter.fetchRequest(url,submissionBody,"POST").then(()=>{
       this.props.createOrderProduct("")
       this.props.searchBarcodeOrder("")
       this.props.placeOrderQTY("")
       this.props.placeOrderPrice("")
       this.props.placeOrderVendor("")
+
     })
 
   }
+
   handleBarcode = (event)=>{
+    console.log("barcode",this.props.allProducts)
     this.props.searchBarcodeOrder(event.target.value)
-    // eslint-disable-next-line 
-    const orderProduct=this.props.allProducts.find(product=>product.barcode === parseInt(event.target.value))
+    // eslint-disable-next-line
+    const orderProduct=this.props.allProducts.find(product=>parseInt(product.barcode) === parseInt(event.target.value))
     if(orderProduct){
       this.props.createOrderProduct(orderProduct)
     }else{
@@ -48,7 +53,7 @@ class Order extends Component {
   }
 
   render() {
-
+      console.log("check",this.props.allProducts)
     return (<div>
       <Link to="/home">Home</Link>
       <Navbar/>
@@ -79,6 +84,7 @@ function mapStateToProps(state) {
     orderPrice:state.orderPrice,
     orderVendor:state.orderVendor,
     currentUser:state.currentUser,
+    allOrders:state.allOrders,
   }
 }
 
@@ -99,6 +105,9 @@ return{
   },
   placeOrderVendor: (data) => {
     dispatch({type: "PLACE_ORDER_VENDOR", payload: data})
+  },
+  addNewOrder: (data) => {
+    dispatch({type: "ADD_NEW_ORDER", payload: data})
   },
 }
 

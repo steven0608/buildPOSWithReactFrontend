@@ -33,11 +33,11 @@ const CreateNewItem = (props) => {
       pomo_price: props.pomo_price,
       most_recent_vendor: props.most_recent_vendor,
       created_by: props.currentUser.username,
-      order: props.order,
-      inventory: props.inventory,
-      adjustment: props.adjustment,
+      order: 0,
+      inventory: 0,
+      adjustment: 0,
       status: props.status,
-      sales: props.sales,
+      sales: 0,
       forecast_sales_three_months: props.forecast_sales_three_months,
       need_to_order_for_next_three_months: props.need_to_order_for_next_three_months,
       annualized_sales: props.annualized_sales,
@@ -46,7 +46,8 @@ const CreateNewItem = (props) => {
       image_url: props.image_url,
       last_edited_by: props.currentUser.username,
       last_cost: props.last_cost,
-      barcode: props.barcode
+      barcode: props.barcode,
+      unit:props.unit,
     }
     const url = "http://localhost:3000/api/v1/products"
     Adapter.fetchRequest(url, submissionBody, "POST").then(() => {
@@ -75,20 +76,11 @@ const CreateNewItem = (props) => {
       <label>Most Recent Vendor:
         <input type="text" value={props.most_recent_vendor} onChange={(event) => props.newMostRecentVendor(event)}/></label>
       <br></br>
-      <label>Order:
-        <input type="text" value={props.order} onChange={(event) => props.newOrder(event)}/></label>
-      <br></br>
-      <label>Inventoy On Hand:
-        <input type="text" value={props.inventory} onChange={(event) => props.newInventory(event)}/></label>
-      <br></br>
-      <label>Adjustment:
-        <input type="text" value={props.adjustment} onChange={(event) => props.newAdjustment(event)}/></label>
+      <label>unit:
+        <input type="text" value={props.unit} onChange={(event) => props.newProductUnit(event.target.value)}/></label>
       <br></br>
       <label>Status:
         <input type="text" value={props.status} onChange={(event) => props.newStatus(event)}/></label>
-      <br></br>
-      <label>Sales:
-        <input type="text" value={props.sales} onChange={(event) => props.newSales(event)}/></label>
       <br></br>
       <label>Forecast Sales For The Next 3 Months:
         <input type="text" value={props.forecast_sales_three_months} onChange={(event) => props.newForecast(event)}/></label>
@@ -120,19 +112,13 @@ const CreateNewItem = (props) => {
 }
 
 function mapStateToProps(state) {
-
-  console.log("check state", state)
   return {
     newProductName: state.newProductName,
     retail_price: state.retail_price,
     pomo_price: state.pomo_price,
     last_cost: state.last_cost,
     most_recent_vendor: state.most_recent_vendor,
-    order: state.order,
-    inventory: state.inventory,
-    adjustment: state.adjustment,
     status: state.status,
-    sales: state.sales,
     forecast_sales_three_months: state.forecast_sales_three_months,
     need_to_order_for_next_three_months: state.need_to_order_for_next_three_months,
     annualized_sales: state.annualized_sales,
@@ -140,7 +126,8 @@ function mapStateToProps(state) {
     category: state.category,
     image_url: state.image_url,
     barcode: state.barcode,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    unit:state.unit,
   }
 }
 
@@ -161,20 +148,8 @@ function mapDispatchToProps(dispatch) {
     newMostRecentVendor: (event) => {
       dispatch({type: "NEW_VENDOR_INPUT", payload: event.target.value})
     },
-    newOrder: (event) => {
-      dispatch({type: "NEW_ORDER_INPUT", payload: event.target.value})
-    },
-    newInventory: (event) => {
-      dispatch({type: "NEW_INVENTORY_INPUT", payload: event.target.value})
-    },
-    newAdjustment: (event) => {
-      dispatch({type: "NEW_ADJUSTMENT_INPUT", payload: event.target.value})
-    },
     newStatus: (event) => {
       dispatch({type: "NEW_STATUS_INPUT", payload: event.target.value})
-    },
-    newSales: (event) => {
-      dispatch({type: "NEW_SALES_INPUT", payload: event.target.value})
     },
     newForecast: (event) => {
       dispatch({type: "NEW_FORECAST_INPUT", payload: event.target.value})
@@ -202,7 +177,13 @@ function mapDispatchToProps(dispatch) {
     },
     addProduct: (newProduct) => {
       dispatch({type: "ADD_NEW_PRODUCT", payload: newProduct})
-    }
+    },
+    newProductUnit:(unit) =>{
+      dispatch({type: "NEW_PRODUCT_UNIT", payload: unit})
+    },
+    updateAllProducts:(data)=>{
+      dispatch({type: "UPDATE_ALL_PRODUCTS",payload:data})
+    },
   }
 }
 

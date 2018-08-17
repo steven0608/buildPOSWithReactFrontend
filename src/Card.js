@@ -1,11 +1,34 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
+import {connect} from "react-redux"
 
-export default class Card extends Component {
+ class Card extends Component {
 
   state = {
     front: true
   }
+
+  orderTotal = ()=>{
+    const productOrders=this.props.allOrders.filter(order=> order.product_id === this.props.product.id)
+    const initialOrder = 0
+    return productOrders.reduce(function(acc, cur) {
+      // eslint-disable-next-line
+      return parseInt(acc) + parseInt(cur.qty)
+    }, initialOrder)
+  }
+
+
+
+
+onOrder =() => {
+  const productOrders=this.props.allOrders.filter(order=> order.product_id === this.props.product.id && order.on_order)
+  const initialOrder = 0
+  return productOrders.reduce(function(acc, cur) {
+    // eslint-disable-next-line
+    return parseInt(acc) + parseInt(cur.qty)
+  }, initialOrder)
+}
+
   clickToView = (event) => {
     event.preventDefault()
     this.setState({
@@ -26,8 +49,11 @@ export default class Card extends Component {
                 <li>Retail Price: {this.props.product.retail_price}</li>
                 <li>Pomo Price: {this.props.product.pomo_price}</li>
                 <li>Last Cost: {this.props.product.last_cost}</li>
+                <li>Unit:{this.props.product.unit}</li>
                 <li>Most Recent Vendor: {this.props.product.most_recent_vendor}</li>
-                <li>Order: {this.props.product.order}<Link to={"/products/"+this.props.product.id+"/orders"}><img src="https://cdn2.iconfinder.com/data/icons/shopping-e-commerce-2-1/32/Success-Place-Order-Complete-Shopping-Tick-512.png" alt="" height="32" width="42" /></Link></li>
+                <li>Total Order: {this.orderTotal()}   <Link to={"/products/"+this.props.product.id+"/orders"}><img src="https://cdn2.iconfinder.com/data/icons/shopping-e-commerce-2-1/32/Success-Place-Order-Complete-Shopping-Tick-512.png" alt="" height="32" width="42" /></Link></li>
+                <li>On Order: {this.onOrder()}</li>
+                <li>Received: {this.props.product.order}</li>
                 <li>Inventory on Hand: {this.props.product.inventory}</li>
                 <li>Adjustment: {this.props.product.adjustment} <img src="https://sixthsensepos.com/images/POSFeatures/Adjust.jpg" alt="" height="32" width="42" /></li>
                 <li>Status: {this.props.product.status}</li>
@@ -39,9 +65,20 @@ export default class Card extends Component {
                 <li>Category: {this.props.product.category}</li>
                 <li>Last Edited by: {this.props.product.last_edited_by}</li>
                 <li>Barcode: {this.props.product.barcode}</li>
+                <li><button><Link to={"/products/"+this.props.product.id+"/edit"}>Click To Edit</Link></button></li>
               </ul>
         }
       </div>
     </div>)
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    allOrders:state.allOrders,
+    allAdjustments:state.allAdjustments,
+    allProductsSales:state.allProductsSales,
+  }
+}
+
+export default connect(mapStateToProps)(Card)

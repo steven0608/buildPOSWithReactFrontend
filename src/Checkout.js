@@ -4,7 +4,7 @@ import Adapter from "./Adapter"
 const Checkout = (props) => {
 
   function handleReceipt() {
-    console.log("checkout")
+    // console.log("checkout")
     if (props.customerPay - props.checkoutTotalDollar >= 0) {
       alert("Your change: " + (
       props.customerPay - props.checkoutTotalDollar))
@@ -31,7 +31,10 @@ const Checkout = (props) => {
           inventory:item.inventory-item.checkoutqty,
           sales:item.sales+item.checkoutqty
         }
-      
+
+        props.allProducts[props.allProducts.indexOf(item)].inventory=item.inventory-item.checkoutqty
+        props.allProducts[props.allProducts.indexOf(item)].sales=item.sales+item.checkoutqty
+        props.updateAllProducts(props.allProducts)
         Adapter.fetchRequest(productUrl, productSubmissionBody, "PATCH")
         return Adapter.fetchRequest(url, submissionBody, "POST")
       })
@@ -87,7 +90,13 @@ const Checkout = (props) => {
 }
 
 function mapStateToProps(state) {
-  return {checkoutTotalDollar: state.checkoutTotalDollar, checkoutTotalSaving: state.checkoutTotalSaving, customerPay: state.customerPay, currentUser: state.currentUser, checkoutItems: state.checkoutItems}
+  return {checkoutTotalDollar: state.checkoutTotalDollar,
+    checkoutTotalSaving: state.checkoutTotalSaving,
+     customerPay: state.customerPay,
+     currentUser: state.currentUser,
+      checkoutItems: state.checkoutItems,
+      allProducts:state.allProducts,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -109,6 +118,9 @@ function mapDispatchToProps(dispatch) {
     },
     resetCustomerPay: () => {
       dispatch({type: "RESET_CUSTOMER_PAY"})
+    },
+    updateAllProducts:(data)=>{
+      dispatch({type: "UPDATE_ALL_PRODUCTS",payload:data})
     }
   }
 }

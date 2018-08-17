@@ -12,7 +12,7 @@ class Adjustment extends Component {
   handleAdjustmentBarcode = (event)=>{
       this.props.searchBarcodeAdjustment(event.target.value)
       // eslint-disable-next-line
-      const adjustmentProduct=this.props.allProducts.find(product=>product.barcode === parseInt(event.target.value))
+      const adjustmentProduct=this.props.allProducts.find(product=>parseInt(product.barcode) === parseInt(event.target.value))
       if(adjustmentProduct){
         this.props.createAdjustmentProduct(adjustmentProduct)
       }else{
@@ -37,9 +37,15 @@ class Adjustment extends Component {
       const productSubmissionBody={
         // eslint-disable-next-line
         inventory:(parseInt(this.props.adjustmentProduct.inventory)+parseInt(this.props.adjustmentQty)),
-        // eslint-disable-next-line 
+        // eslint-disable-next-line
         adjustment:(parseInt(this.props.adjustmentProduct.adjustment)+parseInt(this.props.adjustmentQty)),
       }
+      console.log("check",this.props.allProducts.indexOf(this.props.adjustmentProduct))
+      // eslint-disable-next-line
+      this.props.allProducts[this.props.allProducts.indexOf(this.props.adjustmentProduct)].inventory=(parseInt(this.props.adjustmentProduct.inventory)+parseInt(this.props.adjustmentQty))
+      // eslint-disable-next-line
+      this.props.allProducts[this.props.allProducts.indexOf(this.props.adjustmentProduct)].adjustment=(parseInt(this.props.adjustmentProduct.adjustment)+parseInt(this.props.adjustmentQty))
+      this.props.updateAllProducts(this.props.allProducts)
       Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
     }).then(()=>{
         this.props.createAdjustmentProduct("")
@@ -96,6 +102,9 @@ function mapDispatchToProps(dispatch) {
     },
     adjustmentReason:(data) => {
       dispatch({type: "REASON_CODE", payload: data})
+    },
+    updateAllProducts:(data)=>{
+      dispatch({type: "UPDATE_ALL_PRODUCTS",payload:data})
     },
   }
 }

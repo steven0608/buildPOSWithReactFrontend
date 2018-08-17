@@ -54,6 +54,7 @@ import {connect} from "react-redux"
 // }
 
 import React, { Component } from 'react';
+import Adapter from "./Adapter"
 
   class DisplayOrder extends Component {
 
@@ -67,6 +68,26 @@ import React, { Component } from 'react';
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
        this.props.processAllOrders(this.props.allOrders)
+       const url="http://localhost:3000/api/v1/orders/"+this.props.order.id
+       const submissionBody={
+         on_order:false,
+         received:true,
+         received_by:this.props.currentUser.username
+       }
+       Adapter.fetchRequest(url,submissionBody,"PATCH").then(()=>{
+         const productUrl="http://localhost:3000/api/v1/products/"+this.props.order.product_id
+         const currentProduct=this.props.allProducts.find(product=>product.id === this.props.order.product_id)
+         const productSubmissionBody={
+           order:currentProduct.order+this.props.order.qty,
+           inventory:currentProduct.inventory + this.props.order.qty,
+           last_cost:this.props.order.price,
+           most_recent_vendor:this.props.order.vendor_name,
+         }
+         Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
+         this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=currentProduct.order+this.props.order.qty
+         this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=currentProduct.inventory + this.props.order.qty
+         this.props.updateAllProducts(this.props.allProducts)
+       })
        this.forceUpdate()
 
    }
@@ -105,6 +126,9 @@ import React, { Component } from 'react';
      },
      processAllOrders: (data) => {
        dispatch({type: "UPDATE_ALL_ORDERS", payload: data})
+     },
+     updateAllProducts:(data)=>{
+       dispatch({type: "UPDATE_ALL_PRODUCTS",payload:data})
      },
    }
  }

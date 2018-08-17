@@ -17,9 +17,6 @@ const defaultState = {
   pomo_price: "",
   last_cost: "",
   most_recent_vendor: "",
-  order: "",
-  inventory: "",
-  adjustment: "",
   status: "",
   sales: "",
   forecast_sales_three_months: "",
@@ -50,6 +47,7 @@ const defaultState = {
   adjustmenntReasonCode:"",
   allProductsSales:[],
   allAdjustments:[],
+  unit:"",
   allOrders:[],
 
   filterOrders:[],
@@ -185,21 +183,6 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         most_recent_vendor: action.payload
-      }
-    case "NEW_ORDER_INPUT":
-      return {
-        ...state,
-        order: action.payload
-      }
-    case "NEW_INVENTORY_INPUT":
-      return {
-        ...state,
-        inventory: action.payload
-      }
-    case "NEW_ADJUSTMENT_INPUT":
-      return {
-        ...state,
-        adjustment: action.payload
       }
     case "NEW_STATUS_INPUT":
       return {
@@ -452,7 +435,21 @@ export default function(state = defaultState, action) {
         ...state,
         productOrdersListing:action.payload,
       }
-
+      case "NEW_PRODUCT_UNIT":
+      return{
+        ...state,
+        unit:action.payload,
+      }
+      case "UPDATE_ALL_PRODUCTS":
+      return{
+        ...state,
+        allProducts:action.payload,
+      }
+      case "ADD_NEW_ORDER":
+      return{
+        ...state,
+        allOrders:[...state.allOrders,action.payload]
+      }
     default:
       return state
   }
