@@ -21,6 +21,8 @@ import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route,
 import SeeAllOrders from "./SeeAllOrders"
 import ProductOrdersList from "./ProductOrdersList"
 import EditProduct from "./EditProduct"
+import ShowAdjustments from "./ShowAdjustments"
+import SalesSummary from "./SalesSummary"
 
 // beautify has issue with exact path
 
@@ -82,7 +84,18 @@ class App extends Component {
     							let product = this.props.allProducts.find(product => product.id === parseInt(id))
     							return <EditProduct {...routerProps} product={product}/>
     						}}/>
-
+        <Route path="/products/:id/adjustments" render={(routerProps) => {
+            	let id = routerProps.match.params.id
+                          // eslint-disable-next-line
+            	let adjustments = this.props.allAdjustments.filter(adjustment => adjustment.product_id === parseInt(id))
+            	return <ShowAdjustments {...routerProps} adjustments={adjustments}/>
+            }}/>
+            <Route path="/products/:id/sales" render={(routerProps) => {
+                	let id = routerProps.match.params.id
+                              // eslint-disable-next-line
+                	let sales = this.props.allProductsSales.filter(sale => sale.product_id === parseInt(id))
+                	return <SalesSummary {...routerProps} sales={sales}/>
+                }}/>
       </Switch>
     </Fragment>)
   }
@@ -91,6 +104,8 @@ function mapStateToProps(state) {
   return {login: state.login,
   allOrders:state.allOrders,
   allProducts:state.allProducts,
+  allAdjustments:state.allAdjustments,
+  allProductsSales:state.allProductsSales,
 }
 }
 

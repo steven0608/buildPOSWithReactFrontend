@@ -30,6 +30,7 @@ const submissionBody={
   received:true,
   received_by:this.props.currentUser.username
 }
+
 Adapter.fetchRequest(url,submissionBody,"PATCH").then(()=>{
   const productUrl="http://localhost:3000/api/v1/products/"+this.props.order.product_id
   const currentProduct=this.props.allProducts.find(product=>product.id === this.props.order.product_id)
@@ -40,8 +41,8 @@ Adapter.fetchRequest(url,submissionBody,"PATCH").then(()=>{
     most_recent_vendor:this.props.order.vendor_name,
   }
   Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
-  this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=currentProduct.order + this.props.order.qty
-  this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=currentProduct.inventory + this.props.order.qty
+  this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=parseFloat(currentProduct.order) + parseFloat(this.props.order.qty)
+  this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty)
   this.props.updateAllProducts(this.props.allProducts)
 })
 }

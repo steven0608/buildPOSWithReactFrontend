@@ -45,7 +45,7 @@ class ProductOrdersList extends Component {
  render() {
 
 return (<div>
-  <img src={this.props.allProducts.find(product=> product.id === parseInt(this.props.match.params.id),false).image_url} alt="" height="222" width="332"/>
+  <img src={this.props.allProducts.find(product=> product.id === parseInt(this.props.match.params.id,10)).image_url} alt="" height="222" width="332"/>
   <form onSubmit={this.handleSubmitOrderSearch}>
   <div onChange={this.handleRadioButton}>
   <label><input type="radio" value="All Order" name="All Order" checked={this.props.productOrderRadio === "All Order"}/>All Order</label>

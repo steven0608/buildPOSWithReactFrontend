@@ -16,7 +16,6 @@ class CreateUser extends Component {
       password: this.props.newUser_password,
       role: this.props.newUser_role,
       status: this.props.newUser_status,
-      quote: ""
     }
 
     const url = "http://localhost:3000/api/v1/users"

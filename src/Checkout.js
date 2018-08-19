@@ -7,7 +7,7 @@ const Checkout = (props) => {
     // console.log("checkout")
     if (props.customerPay - props.checkoutTotalDollar >= 0) {
       alert("Your change: " + (
-      props.customerPay - props.checkoutTotalDollar))
+      props.customerPay - props.checkoutTotalDollar).toFixed(2))
     }
     fetch("http://localhost:3000/api/v1/sales_transcations").then(r => r.json()).then(data => {
       // debugger;
@@ -43,7 +43,7 @@ const Checkout = (props) => {
         total: props.checkoutTotalDollar,
         total_saving: props.checkoutTotalSaving,
         cash_from_customer: props.customerPay,
-        change_to_customer: props.checkoutTotalDollar - props.customerPay
+        change_to_customer: (props.checkoutTotalDollar - props.customerPay).toFixed(2)
       }
       Adapter.fetchRequest(transcationUrl, updateTransaction, "PATCH")
     }).then(() => {
@@ -82,7 +82,7 @@ const Checkout = (props) => {
       <td>Change</td>
       <td>{
           "$" + (
-          props.customerPay - props.checkoutTotalDollar)
+          (props.customerPay - props.checkoutTotalDollar).toFixed(2))
         }</td>
         <td><input type="button" value="Print Receipt" onClick={handleReceipt}style={(props.customerPay-props.checkoutTotalDollar)>=0 ? {display:"block"} : {display:"none"}}/></td>
     </tr>

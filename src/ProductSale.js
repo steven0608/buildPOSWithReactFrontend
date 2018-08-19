@@ -8,11 +8,11 @@ class ProductSale extends Component {
 
   handleQtyInput = (event) => {
     // const item=this.props.checkoutItems.find(checkoutItem=>checkoutItem.id === this.props.checkoutItem.id)
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
     const qtyInput = parseInt(event.target.value)
     this.setState({userInput: qtyInput})
     this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].checkoutqty = qtyInput
-    this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalDollars = this.props.checkoutItem.pomo_price * qtyInput
+    this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalDollars = (this.props.checkoutItem.pomo_price * qtyInput).toFixed(2)
     this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalSavings = (this.props.checkoutItem.retail_price - this.props.checkoutItem.pomo_price) * qtyInput
     this.props.addTotal(this.props.checkoutItems)
   }

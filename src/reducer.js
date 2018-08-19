@@ -56,10 +56,10 @@ const defaultState = {
   productOrderRadio:"",
   productOrdersSearchInput:"",
   productOrdersListing:[],
-
-
-
-
+  adjustmentSearchInput:"",
+  filterAdjustment:[],
+  showEditQuoteField:false,
+  quoteInput:"",
 
 }
 
@@ -449,6 +449,32 @@ export default function(state = defaultState, action) {
       return{
         ...state,
         allOrders:[...state.allOrders,action.payload]
+      }
+      case "HANDLE_SEARCH_ADJUSTMENT":
+      return{
+        ...state,
+        adjustmentSearchInput:action.payload,
+      }
+      case "HANDLE_FILTER_ADJUSTMENT":
+      return{
+        ...state,
+        filterAdjustment:action.payload,
+      }
+      case "SHOW_EDIT_QUOTE_FIELD":
+      return{
+        ...state,
+        showEditQuoteField:!state.showEditQuoteField,
+      }
+
+      case "UPDATE_QUOTE_INPUT":
+      return{
+        ...state,
+      quoteInput:action.payload,
+      }
+      case "UPDATE_QUOTE_FOR_CURRENT_USER":
+      return{
+        ...state,
+        currentUser:action.payload,
       }
     default:
       return state

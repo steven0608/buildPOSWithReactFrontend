@@ -19,21 +19,22 @@ class Pos extends Component {
 
     let initialTotalDollar = 0
     let totalCheckoutDollars = this.props.checkoutItems.reduce(function(acc, cur) {
-      return acc + cur.totalDollars
-    }, initialTotalDollar)
+
+      return acc + parseFloat(cur.totalDollars)
+    }, initialTotalDollar).toFixed(2)
     this.props.addtotalDollars(totalCheckoutDollars)
 
     let initialTotalSaving = 0
     let totalCheckoutSavings = this.props.checkoutItems.reduce(function(acc, cur) {
-      return acc + cur.totalSavings
-    }, initialTotalSaving)
+      return acc + parseFloat(cur.totalDollars)
+    }, initialTotalSaving).toFixed(2)
     this.props.addtotalSavings(totalCheckoutSavings)
 
   }
 
   handleAddToCart = (event) => {
     event.preventDefault()
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
     const addedItem = this.props.allProducts.find(product => product.barcode == this.props.checkoutItemInput || product.item_name === this.props.checkoutItemInput)
     // debugger;
     if (addedItem && this.props.checkoutItems.indexOf(addedItem) === -1) {

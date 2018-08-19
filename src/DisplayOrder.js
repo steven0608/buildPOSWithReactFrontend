@@ -78,14 +78,14 @@ import Adapter from "./Adapter"
          const productUrl="http://localhost:3000/api/v1/products/"+this.props.order.product_id
          const currentProduct=this.props.allProducts.find(product=>product.id === this.props.order.product_id)
          const productSubmissionBody={
-           order:currentProduct.order+this.props.order.qty,
-           inventory:currentProduct.inventory + this.props.order.qty,
+           order:parseFloat(currentProduct.order)+parseFloat(this.props.order.qty),
+           inventory:parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty),
            last_cost:this.props.order.price,
            most_recent_vendor:this.props.order.vendor_name,
          }
          Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
-         this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=currentProduct.order+this.props.order.qty
-         this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=currentProduct.inventory + this.props.order.qty
+         this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=parseFloat(currentProduct.order)+parseFloat(this.props.order.qty)
+         this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty)
          this.props.updateAllProducts(this.props.allProducts)
        })
        this.forceUpdate()
