@@ -9,7 +9,7 @@ class Report extends Component {
 
   filterData = (event) => {
     event.preventDefault()
-    
+
     if(this.props.dateRangeTo.slice(0, 4) === this.props.dateRangeFrom.slice(0, 4)){
     const reportDatamonth = this.props.allSalesData.filter(data => data.created_at.slice(0, 4) >= this.props.dateRangeFrom.slice(0, 4) && data.created_at.slice(0, 4) <= this.props.dateRangeTo.slice(0, 4) && data.created_at.slice(5, 7) >= this.props.dateRangeFrom.slice(5, 7) && data.created_at.slice(5, 7) <= this.props.dateRangeTo.slice(5, 7))
     const reportData = reportDatamonth.filter(data => !(data.created_at.slice(5, 7) === this.props.dateRangeTo.slice(5, 7) && data.created_at.slice(8, 10) > this.props.dateRangeTo.slice(8, 10)))
@@ -26,8 +26,8 @@ class Report extends Component {
       <Link to="/home">Home</Link>
       <Navbar/>
       <form onSubmit={this.filterData}>
-        <label>From<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeFrom} onChange={(event) => this.props.changeDataRangeFrom(event)}/></label>
-        <label>To<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeTo} onChange={(event) => this.props.changeDataRangeTo(event)}/></label>
+        <label>From<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeFrom} onChange={(event) => this.props.changeDataRangeFrom(event)} required/></label>
+        <label>To<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeTo} onChange={(event) => this.props.changeDataRangeTo(event)} required/></label>
         <input type="submit" value="Get Sales Data"/>
       </form>
       {
@@ -42,6 +42,7 @@ class Report extends Component {
                   <th>Pomo Price</th>
                   <th>Total</th>
                   <th>Saving</th>
+                  <th>Transcation Date</th>
                 </tr>
               </thead>
               <tbody>

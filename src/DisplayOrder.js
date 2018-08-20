@@ -62,11 +62,13 @@ import Adapter from "./Adapter"
      console.log("try this",this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].received)
      this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].on_order=false
      this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].received=true
+     this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
        this.props.processFilterOrders(this.props.filterOrders)
 
 
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
+     this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
        this.props.processAllOrders(this.props.allOrders)
        const url="http://localhost:3000/api/v1/orders/"+this.props.order.id
        const submissionBody={
@@ -102,7 +104,7 @@ import Adapter from "./Adapter"
      <p>Order By:{this.props.order.order_by}</p>
      <p>Received By:{this.props.order.received_by}</p>
      <p>Order Created Date:{this.props.order.created_at.slice(0,10)}</p>
-     <p>Click To Confirm Product Received:{this.props.order.received ? "Received Already!" : <button onClick={this.processReceiving}>On Order</button> }</p>
+     {this.props.order.received ? <p>Received Already!</p> : <p>Click To Confirm Product Received:<button onClick={this.processReceiving}>On Order</button></p>}
      </li>)
      }
  }

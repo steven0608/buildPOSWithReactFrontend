@@ -62,25 +62,25 @@ const CreateNewItem = (props) => {
     <h1>Create New Item From</h1>
     <form onSubmit={handleCreateNewItem}>
       <label>Item Name:
-        <input type="text" value={props.newProductName} onChange={(event) => props.newItemName(event)}/></label>
+        <input type="text" value={props.newProductName} onChange={(event) => props.newItemName(event)} required/></label>
       <br></br>
       <label>Retail Price:
-        <input type="text" value={props.retail_price} onChange={(event) => props.newRetailPrice(event)}/></label>
+        <input type="text" value={props.retail_price} onChange={(event) => props.newRetailPrice(event)} required/></label>
       <br></br>
       <label>Pomo Price:
-        <input type="text" value={props.pomo_price} onChange={(event) => props.newPomoPrice(event)}/></label>
+        <input type="text" value={props.pomo_price} onChange={(event) => props.newPomoPrice(event)} required/></label>
       <br></br>
       <label>Last Cost:
-        <input type="text" value={props.last_cost} onChange={(event) => props.newLastCost(event)}/></label>
+        <input type="text" value={props.last_cost} onChange={(event) => props.newLastCost(event)} required/></label>
       <br></br>
       <label>Most Recent Vendor:
-        <input type="text" value={props.most_recent_vendor} onChange={(event) => props.newMostRecentVendor(event)}/></label>
+        <input type="text" value={props.most_recent_vendor} onChange={(event) => props.newMostRecentVendor(event)}required/></label>
       <br></br>
       <label>unit:
-        <input type="text" value={props.unit} onChange={(event) => props.newProductUnit(event.target.value)}/></label>
+        <input type="text" value={props.unit} onChange={(event) => props.newProductUnit(event.target.value)}required/></label>
       <br></br>
       <label>Status:
-        <input type="text" value={props.status} onChange={(event) => props.newStatus(event)}/></label>
+        <input type="text" value={props.status} onChange={(event) => props.newStatus(event)}required/></label>
       <br></br>
       <label>Forecast Sales For The Next 3 Months:
         <input type="text" value={props.forecast_sales_three_months} onChange={(event) => props.newForecast(event)}/></label>
@@ -99,10 +99,10 @@ const CreateNewItem = (props) => {
       <button onClick={uploadHandler}>Upload</button>
       <br></br>
       <label>Category:
-        <input type="text" value={props.category} onChange={(event) => props.newCategory(event)}/></label>
+        <input type="text" value={props.category} onChange={(event) => props.newCategory(event)}required/></label>
       <br></br>
       <label>Barcode:
-        <input type="text" value={props.barcode} onChange={(event) => props.newBarcode(event)}/></label>
+        <input type="text" value={props.barcode} onChange={(event) => props.newBarcode(event)}required/></label>
       <br></br>
       <input type="submit" value="Create New Item"/>
     </form>

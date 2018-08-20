@@ -48,10 +48,28 @@ class Adjustment extends Component {
       this.props.updateAllProducts(this.props.allProducts)
       Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
     }).then(()=>{
-        this.props.createAdjustmentProduct("")
-        this.props.searchBarcodeAdjustment("")
-        this.props.adjustQty("")
-        this.props.adjustmentReason("")
+        const today = new Date()
+        if(today.getMonth()<10){
+          const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                  submissionBody.created_at=date
+                  console.log("check this",submissionBody)
+                  this.props.updateAllAdjustments(submissionBody)
+                  this.props.createAdjustmentProduct("")
+                  this.props.searchBarcodeAdjustment("")
+                  this.props.adjustQty("")
+                  this.props.adjustmentReason("")
+
+
+        }else {
+          const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                submissionBody.created_at=date
+                this.props.updateAllAdjustments(submissionBody)
+                console.log("check this",submissionBody)
+                this.props.createAdjustmentProduct("")
+                this.props.searchBarcodeAdjustment("")
+                this.props.adjustQty("")
+                this.props.adjustmentReason("")
+        }
     })
   }
 
@@ -63,13 +81,13 @@ class Adjustment extends Component {
       Hi,User!
       <h1>Create Adjustment</h1>
       <form onSubmit={this.handleAdjustment}>
-      <label>Barcode:<input type="text" value={this.props.adjustmentBarcode} onChange={this.handleAdjustmentBarcode}/></label>
+      <label>Barcode:<input type="text" value={this.props.adjustmentBarcode} onChange={this.handleAdjustmentBarcode} required/></label>
       <p><img src={this.props.adjustmentProduct.image_url} alt=""/></p>
       <p>Product Name: {this.props.adjustmentProduct.item_name}</p>
       <p>Last Cost: {this.props.adjustmentProduct.last_cost}</p>
       <p>Total Cost Dollars:{(this.props.adjustmentProduct.last_cost*this.props.adjustmentQty) ? this.props.adjustmentProduct.last_cost*this.props.adjustmentQty : null }</p>
-      <label>Qty to adjust: <input type="text" value={this.props.adjustmentQty} onChange={(event)=>this.props.adjustQty(event.target.value)}/></label><br></br>
-      <label>Reason Code: <input type="text" value={this.props.adjustmenntReasonCode} onChange={(event)=>this.props.adjustmentReason(event.target.value)}/></label><br></br>
+      <label>Qty to adjust: <input type="text" value={this.props.adjustmentQty} onChange={(event)=>this.props.adjustQty(event.target.value)} required/></label><br></br>
+      <label>Reason Code: <input type="text" value={this.props.adjustmenntReasonCode} onChange={(event)=>this.props.adjustmentReason(event.target.value)}required/></label><br></br>
       <input type="submit" value="Create Adjustment"/>
       <br></br>
       </form>
@@ -105,6 +123,9 @@ function mapDispatchToProps(dispatch) {
     },
     updateAllProducts:(data)=>{
       dispatch({type: "UPDATE_ALL_PRODUCTS",payload:data})
+    },
+    updateAllAdjustments:(data)=>{
+      dispatch({type: "ADD_ADJUSTMENT_ALL",payload:data})
     },
   }
 }

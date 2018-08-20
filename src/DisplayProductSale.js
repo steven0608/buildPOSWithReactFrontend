@@ -9,6 +9,7 @@ const DisplayProductSale = (props) => {
     <td>{props.productSale.pomo_price}</td>
     <td>{props.productSale.total}</td>
     <td>{props.productSale.total_saving}</td>
+    <td>{props.productSale.created_at.slice(0,10)}</td>
   </tr>)
 }
 

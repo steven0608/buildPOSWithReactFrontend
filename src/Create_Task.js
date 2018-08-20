@@ -33,8 +33,8 @@ class CreateTask extends Component {
       <div>Selected Member:</div>
       <ul></ul>
       <form onSubmit={this.handleCreateTaskSubmit}>
-        <label>Task To:<input type="text" value={this.props.task_to} onChange={(event) => this.props.handleTaskToInput(event)}/></label>
-        <label>Message<input type="text" value={this.props.message} onChange={(event) => this.props.handleCreateTaskMessageInput(event)}/></label>
+        <label>Task To:<input type="text" value={this.props.task_to} onChange={(event) => this.props.handleTaskToInput(event)}required /></label>
+        <label>Message<input type="text" value={this.props.message} onChange={(event) => this.props.handleCreateTaskMessageInput(event)} required/></label>
         <input type="submit" value="Create Task"/>
       </form>
     </div>)

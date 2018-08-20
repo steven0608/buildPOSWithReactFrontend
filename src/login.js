@@ -24,9 +24,9 @@ class Login extends Component {
     return (<form onSubmit={this.handleSubmit
 }>
       <label>User Name:
-        <input type="text" value={this.props.usernameInput} onChange={(event) => this.props.handleUsernameInput(event)}/></label>
+        <input type="text" value={this.props.usernameInput} onChange={(event) => this.props.handleUsernameInput(event)} required/></label>
       <label>Password:
-        <input type="password" value={this.props.passwordInput} onChange={(event) => this.props.handlePasswordInput(event)}/></label>
+        <input type="password" value={this.props.passwordInput} onChange={(event) => this.props.handlePasswordInput(event)} required/></label>
       <input type="submit" value="Login"/>
     </form>)
   }

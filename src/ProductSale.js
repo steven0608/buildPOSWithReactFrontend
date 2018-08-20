@@ -17,6 +17,10 @@ class ProductSale extends Component {
     this.props.addTotal(this.props.checkoutItems)
   }
 
+  handleDelete = ()=>{
+    const items = this.props.checkoutItems.filter(item => item.id !== this.props.checkoutItem.id)
+    this.props.deleteCheckoutItem(items)
+  }
   render() {
     // console.log("check input",this.props.checkoutItem)
     return (<tr>
@@ -26,19 +30,25 @@ class ProductSale extends Component {
       <td>{this.props.checkoutItem.pomo_price}</td>
       <td>{this.props.checkoutItem.totalDollars}</td>
       <td>{this.props.checkoutItem.totalSavings}</td>
+      <td><button onClick={this.handleDelete} disabled={this.props.disableDeleteButton}> delete</button></td>
     </tr>)
   }
 }
 
 function mapStateToProps(state) {
-  return {checkoutItems: state.checkoutItems,}
+  return {checkoutItems: state.checkoutItems,
+  disableDeleteButton:state.disableDeleteButton,
+}
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     addTotal: (checkoutItems) => {
       dispatch({type: "ADD_TOTAL_DOLLARS", payload: checkoutItems})
-    }
+    },
+    deleteCheckoutItem: (checkoutItems) => {
+      dispatch({type: "DELETE_CHECKOUT_ITEM", payload: checkoutItems})
+    },
   }
 }
 

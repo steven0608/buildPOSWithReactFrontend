@@ -10,6 +10,7 @@ import Checkout from "./Checkout"
 class Pos extends Component {
 
   currentTransaction = () => {
+    this.props.disableDeleteButton()
     const url = "http://localhost:3000/api/v1/sales_transcations"
     const submissionBody = {
       user_id: this.props.currentUser.id
@@ -122,7 +123,10 @@ function mapDispatchToProps(dispatch) {
     },
     resetInput: () => {
       dispatch({type: "RESET_INPUT"})
-    }
+    },
+    disableDeleteButton: () => {
+      dispatch({type: "DISABLE_DELETE_BUTTON"})
+    },
   }
 }
 

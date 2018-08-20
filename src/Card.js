@@ -36,7 +36,7 @@ onOrder =() => {
     })
   }
   render() {
-
+    
     return (<div>
       <div onClick={this.clickToView}>
         {this.props.product.item_name}

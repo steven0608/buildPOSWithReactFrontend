@@ -32,7 +32,7 @@ const defaultState = {
   checkoutTotalSaving: "",
   processCheckout: false,
   customerPay: "",
-  allSalesData: "",
+  allSalesData: [],
   reportData: [],
   dateRangeFrom: "",
   dateRangeTo: "",
@@ -60,7 +60,9 @@ const defaultState = {
   filterAdjustment:[],
   showEditQuoteField:false,
   quoteInput:"",
-
+  searchItemInput:"",
+  searchItemsList:[],
+  disableDeleteButton:false,
 }
 
 export default function(state = defaultState, action) {
@@ -475,6 +477,36 @@ export default function(state = defaultState, action) {
       return{
         ...state,
         currentUser:action.payload,
+      }
+      case "ADD_ADJUSTMENT_ALL":
+      return{
+        ...state,
+        allAdjustments:[...state.allAdjustments,action.payload]
+      }
+      case "ITEM_SEARCH_INPUT":
+      return{
+        ...state,
+        searchItemInput:action.payload,
+      }
+      case "ITEM_SEARCH_OUTCOME":
+      return{
+        ...state,
+        searchItemsList:action.payload,
+      }
+      case "DELETE_CHECKOUT_ITEM":
+      return{
+        ...state,
+        checkoutItems:action.payload,
+      }
+      case "DISABLE_DELETE_BUTTON":
+      return{
+        ...state,
+        disableDeleteButton:!state.disableDeleteButton,
+      }
+      case "ADD_PRODUCT_SALE":
+      return{
+        ...state,
+        allSalesData:[...state.allSalesData,action.payload]
       }
     default:
       return state

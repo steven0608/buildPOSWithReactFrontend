@@ -32,7 +32,8 @@ class ProfilePage extends Component {
     this.props.history.push("/createuser")
   }
 
-  handleSubmitQuote=()=>{
+  handleSubmitQuote=(event)=>{
+    event.preventDefault()
     const url="http://localhost:3000/api/v1/users/"+this.props.currentUser.id
     const submissionBody={
       quote:this.props.quoteInput
@@ -58,8 +59,8 @@ class ProfilePage extends Component {
       <Navbar/>
       Hi,User!
       <div>Quote of the week: {!this.props.showEditQuoteField ? <Fragment>{this.props.currentUser.quote ? this.props.currentUser.quote : "empty" }<input type="button" value="edit" onClick={this.props.handleEditOption}/></Fragment> :
-        <Fragment><input type="text" value={this.props.quoteInput} onChange={(event)=>this.props.handleQuoteInput(event.target.value)} placeholder="Please enter your quote"/>
-          <input type="submit" value="Update" onClick={this.handleSubmitQuote} />
+        <Fragment><form onSubmit={this.handleSubmitQuote}><input type="text" value={this.props.quoteInput} onChange={(event)=>this.props.handleQuoteInput(event.target.value)} placeholder="Please enter your quote"/>
+          <input type="submit" value="Update" /></form>
         </Fragment>
     }</div>
       <h3>Task</h3>

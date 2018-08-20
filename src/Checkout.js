@@ -14,8 +14,11 @@ const Checkout = (props) => {
       const findTranscations = data.find(transcation => transcation.user_id === props.currentUser.id && transcation.total_saving === null)
       const currentTransactionId = findTranscations.id
       const url = "http://localhost:3000/api/v1/products_sales"
-      console.log(props.checkoutItems)
+    
+      let allItemSales=[]
+      const today = new Date()
       props.checkoutItems.forEach(item => {
+
         let submissionBody = {
           sales_transcation_id: currentTransactionId,
           product_id: item.id,
@@ -26,6 +29,19 @@ const Checkout = (props) => {
           retail_price: item.retail_price,
           pomo_price: item.pomo_price
         }
+
+
+          if(today.getMonth()<10){
+            const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                    submissionBody.created_at=date
+                    allItemSales.push(submissionBody)
+          }else {
+            const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                  submissionBody.created_at=date
+                  allItemSales.push(submissionBody)
+          }
+
+
         const productUrl="http://localhost:3000/api/v1/products/"+item.id
         let productSubmissionBody = {
           inventory:item.inventory-item.checkoutqty,
@@ -37,7 +53,10 @@ const Checkout = (props) => {
         props.updateAllProducts(props.allProducts)
         Adapter.fetchRequest(productUrl, productSubmissionBody, "PATCH")
         return Adapter.fetchRequest(url, submissionBody, "POST")
+
       })
+
+
       const transcationUrl = "http://localhost:3000/api/v1/sales_transcations/" + currentTransactionId
       const updateTransaction = {
         total: props.checkoutTotalDollar,
@@ -45,13 +64,26 @@ const Checkout = (props) => {
         cash_from_customer: props.customerPay,
         change_to_customer: (props.checkoutTotalDollar - props.customerPay).toFixed(2)
       }
+
       Adapter.fetchRequest(transcationUrl, updateTransaction, "PATCH")
+      updateTransaction.products_sales=allItemSales
+
+      if(today.getMonth()<10){
+        const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                updateTransaction.created_at=date
+                props.addProductSale(updateTransaction)
+      }else {
+        const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+              updateTransaction.created_at=date
+              props.addProductSale(updateTransaction)
+      }
     }).then(() => {
       props.resetCheckoutItems()
       props.resetCheckoutTotalDollar()
       props.resetCheckoutTotalSaving()
       props.resetProcessCheckout()
       props.resetCustomerPay()
+      props.disableDeleteButton()
     })
 
   }
@@ -121,7 +153,14 @@ function mapDispatchToProps(dispatch) {
     },
     updateAllProducts:(data)=>{
       dispatch({type: "UPDATE_ALL_PRODUCTS",payload:data})
-    }
+    },
+    disableDeleteButton: () => {
+      dispatch({type: "DISABLE_DELETE_BUTTON"})
+    },
+    addProductSale:(data)=>{
+      dispatch({type: "ADD_PRODUCT_SALE",payload:data})
+    },
+
   }
 }
 

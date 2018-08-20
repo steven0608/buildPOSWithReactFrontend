@@ -181,25 +181,25 @@ return (<div>
   <h1>Edit Item From</h1>
   <form onSubmit={this.handleEditedItem}>
     <label>Item Name:
-      <input type="text" value={this.state.item_name} onChange={this.newItem_Name}/></label>
+      <input type="text" value={this.state.item_name} onChange={this.newItem_Name} required/></label>
     <br></br>
     <label>Retail Price:
-      <input type="text" value={this.state.retail_price} onChange={this.newRetailPrice}/></label>
+      <input type="text" value={this.state.retail_price} onChange={this.newRetailPrice} required/></label>
     <br></br>
     <label>Pomo Price:
-      <input type="text" value={this.state.pomo_price} onChange={this.newPomoPrice}/></label>
+      <input type="text" value={this.state.pomo_price} onChange={this.newPomoPrice} required/></label>
     <br></br>
     <label>Last Cost:
-      <input type="text" value={this.state.last_cost} onChange={this.newLastCost}/></label>
+      <input type="text" value={this.state.last_cost} onChange={this.newLastCost}required/></label>
     <br></br>
     <label>Most Recent Vendor:
-      <input type="text" value={this.state.most_recent_vendor} onChange={this.newMostRecentVendor}/></label>
+      <input type="text" value={this.state.most_recent_vendor} onChange={this.newMostRecentVendor}required/></label>
     <br></br>
     <label>unit:
-      <input type="text" value={this.state.unit} onChange={this.newProductUnit}/></label>
+      <input type="text" value={this.state.unit} onChange={this.newProductUnit}required/></label>
     <br></br>
     <label>Status:
-      <input type="text" value={this.state.status} onChange={this.newStatus}/></label>
+      <input type="text" value={this.state.status} onChange={this.newStatus}required/></label>
     <br></br>
     <label>Forecast Sales For The Next 3 Months:
       <input type="text" value={this.state.forecast_sales_three_months} onChange={this.newForecast}/></label>
@@ -218,10 +218,10 @@ return (<div>
     <button onClick={this.uploadHandler}>Upload</button>
     <br></br>
     <label>Category:
-      <input type="text" value={this.state.category} onChange={this.newCategory}/></label>
+      <input type="text" value={this.state.category} onChange={this.newCategory}required/></label>
     <br></br>
     <label>Barcode:
-      <input type="text" value={this.state.barcode} onChange={this.newBarcode}/></label>
+      <input type="text" value={this.state.barcode} onChange={this.newBarcode}required/></label>
     <br></br>
     <input type="submit" value="Create New Item"/>
   </form>

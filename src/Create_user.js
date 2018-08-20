@@ -27,13 +27,13 @@ class CreateUser extends Component {
     return (<Fragment>
       <h2>Create a User</h2>
       <form onSubmit={this.handleCreateUserSubmit}>
-        <label>Username:<input type="text" value={this.props.newUser_username} onChange={(event) => this.props.handleNewUserUsernameInput(event)}/></label>
+        <label>Username:<input type="text" value={this.props.newUser_username} onChange={(event) => this.props.handleNewUserUsernameInput(event)} required/></label>
 
-        <label>password:<input type="password" value={this.props.newUser_password} onChange={(event) => this.props.handleNewUserPasswordInput(event)}/></label>
+        <label>password:<input type="password" value={this.props.newUser_password} onChange={(event) => this.props.handleNewUserPasswordInput(event)} required/></label>
 
-        <label>Role:<input type="text" value={this.props.newUser_role} onChange={(event) => this.props.handleNewUserRoleInput(event)}/></label>
+        <label>Role:<input type="text" value={this.props.newUser_role} onChange={(event) => this.props.handleNewUserRoleInput(event)} required/></label>
 
-        <label>Status:<input type="text" value={this.props.newUser_status} onChange={(event) => this.props.handleNewUserStatusInput(event)}/></label>
+        <label>Status:<input type="text" value={this.props.newUser_status} onChange={(event) => this.props.handleNewUserStatusInput(event)}required/></label>
 
         <input type="submit" value="Create User"/>
       </form>

@@ -43,15 +43,15 @@ class ProductOrdersList extends Component {
 
 
  render() {
-
+  
 return (<div>
   <img src={this.props.allProducts.find(product=> product.id === parseInt(this.props.match.params.id,10)).image_url} alt="" height="222" width="332"/>
   <form onSubmit={this.handleSubmitOrderSearch}>
-  <div onChange={this.handleRadioButton}>
-  <label><input type="radio" value="All Order" name="All Order" checked={this.props.productOrderRadio === "All Order"}/>All Order</label>
-  <label><input type="radio" value="On Order" name="On Order" checked={this.props.productOrderRadio === "On Order"}/>On Order</label>
-  <label><input type="radio" value="Received" name="Received" checked={this.props.productOrderRadio === "Received"}/>Received</label>
-  </div>
+
+  <label><input type="radio" value="All Order" name="All Order" checked={this.props.productOrderRadio === "All Order"} onChange={this.handleRadioButton}/>All Order</label>
+  <label><input type="radio" value="On Order" name="On Order" checked={this.props.productOrderRadio === "On Order"} onChange={this.handleRadioButton}/>On Order</label>
+  <label><input type="radio" value="Received" name="Received" checked={this.props.productOrderRadio === "Received"} onChange={this.handleRadioButton} />Received</label>
+
   <label>Filter By Order Date:<input type="text" value={this.props.productOrdersSearchInput} onChange={(event)=>this.props.handleProductOrdersSearchInput(event.target.value)} placeholder="YYYY-MM-DD" /></label>
   <input type="submit" value="Search"/>
   </form>

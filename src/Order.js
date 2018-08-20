@@ -27,14 +27,30 @@ class Order extends Component {
       received_by:"Not Yet",
       total_dollars:this.props.orderPrice*this.props.orderQty,
     }
-    this.props.addNewOrder(submissionBody)
+
 
     Adapter.fetchRequest(url,submissionBody,"POST").then(()=>{
-      this.props.createOrderProduct("")
-      this.props.searchBarcodeOrder("")
-      this.props.placeOrderQTY("")
-      this.props.placeOrderPrice("")
-      this.props.placeOrderVendor("")
+        const today = new Date()
+          if(today.getMonth()<10){
+            const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                    submissionBody.created_at=date
+            this.props.addNewOrder(submissionBody)
+            this.props.createOrderProduct("")
+            this.props.searchBarcodeOrder("")
+            this.props.placeOrderQTY("")
+            this.props.placeOrderPrice("")
+            this.props.placeOrderVendor("")
+          }else {
+            const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                  submissionBody.created_at=date
+            this.props.addNewOrder(submissionBody)
+            this.props.createOrderProduct("")
+            this.props.searchBarcodeOrder("")
+            this.props.placeOrderQTY("")
+            this.props.placeOrderPrice("")
+            this.props.placeOrderVendor("")
+          }
+
 
     })
 
@@ -61,14 +77,14 @@ class Order extends Component {
       <input type="button" value="See All Orders" onClick={this.handleSeeAllOrders}/>
       <h1>Create Order</h1>
       <form onSubmit={this.createOpenOrder}>
-      <label>Barcode:<input type="text" value={this.props.orderBarcode} onChange={this.handleBarcode} /></label><br></br>
+      <label>Barcode:<input type="text" value={this.props.orderBarcode} onChange={this.handleBarcode} required/></label><br></br>
       <p><img src={this.props.orderProduct.image_url} alt=""/></p>
       <p>Product ID:{this.props.orderProduct.id}</p>
       <p>Product Name:{this.props.orderProduct.item_name}</p>
-      <label>Quantity:<input type="text" value={this.props.orderQty} onChange={(event)=>this.props.placeOrderQTY(event.target.value)} /></label><br></br>
-      <label>Price:<input type="text" value={this.props.orderPrice} onChange={(event)=>this.props.placeOrderPrice(event.target.value)} /></label><br></br>
+      <label>Quantity:<input type="text" value={this.props.orderQty} onChange={(event)=>this.props.placeOrderQTY(event.target.value) } required/></label><br></br>
+      <label>Price:<input type="text" value={this.props.orderPrice} onChange={(event)=>this.props.placeOrderPrice(event.target.value)} required/></label><br></br>
       <p>Total Dollars:{this.props.orderQty*this.props.orderPrice}</p>
-      <label>Vendor Name:<input type="text" value={this.props.orderVendor} onChange={(event)=>this.props.placeOrderVendor(event.target.value)} /></label><br></br>
+      <label>Vendor Name:<input type="text" value={this.props.orderVendor} onChange={(event)=>this.props.placeOrderVendor(event.target.value)} required/></label><br></br>
       <input type="submit" value="Create Open Order"/>
       </form>
     </div>)
