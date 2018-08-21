@@ -53,11 +53,11 @@ class Pos extends Component {
     return (<div>
       <Link to="/home">Home</Link>
       <Navbar/>
-      Hi,User!<br></br>
+      <br></br>
       <form onSubmit={this.handleAddToCart}>
         <label>Add Items:
           <input type="text" value={this.props.checkoutItemInput} onChange={(event) => this.props.handlecheckoutItemInput(event)}/></label>
-        <input type="submit" value="add to cart"/>
+        <input class="positive ui button" type="submit" value="add to cart"/>
       </form>
       <table>
         <thead>
@@ -86,10 +86,16 @@ class Pos extends Component {
           }
         </tbody>
       </table>
-      <button onClick={this.currentTransaction}>Checkout</button>
+      <div className="ui left action input">
+      <button className="ui teal labeled icon button" onClick={this.currentTransaction}>
+      <i className="cart icon"></i>
+      Checkout</button>
+      </div>
     </div>)
   }
 }
+
+
 
 function mapStateToProps(state) {
   return {

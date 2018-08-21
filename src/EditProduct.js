@@ -184,13 +184,13 @@ return (<div>
       <input type="text" value={this.state.item_name} onChange={this.newItem_Name} required/></label>
     <br></br>
     <label>Retail Price:
-      <input type="text" value={this.state.retail_price} onChange={this.newRetailPrice} required/></label>
+      <input type="number" value={this.state.retail_price}  step="0.01" onChange={this.newRetailPrice} required/></label>
     <br></br>
     <label>Pomo Price:
-      <input type="text" value={this.state.pomo_price} onChange={this.newPomoPrice} required/></label>
+      <input type="number" value={this.state.pomo_price} step="0.01" onChange={this.newPomoPrice} required/></label>
     <br></br>
     <label>Last Cost:
-      <input type="text" value={this.state.last_cost} onChange={this.newLastCost}required/></label>
+      <input type="number" value={this.state.last_cost} step="0.01" onChange={this.newLastCost}required/></label>
     <br></br>
     <label>Most Recent Vendor:
       <input type="text" value={this.state.most_recent_vendor} onChange={this.newMostRecentVendor}required/></label>

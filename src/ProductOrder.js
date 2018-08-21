@@ -36,8 +36,8 @@ if (this.props.order.id) {
     const productUrl="http://localhost:3000/api/v1/products/"+this.props.order.product_id
     const currentProduct=this.props.allProducts.find(product=>product.id === this.props.order.product_id)
     const productSubmissionBody={
-      order:currentProduct.order + this.props.order.qty,
-      inventory:currentProduct.inventory + this.props.order.qty,
+      order:parseFloat(currentProduct.order) + parseFloat(this.props.order.qty),
+      inventory:parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty),
       last_cost:this.props.order.price,
       most_recent_vendor:this.props.order.vendor_name,
     }

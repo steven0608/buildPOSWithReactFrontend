@@ -81,8 +81,8 @@ class Order extends Component {
       <p><img src={this.props.orderProduct.image_url} alt=""/></p>
       <p>Product ID:{this.props.orderProduct.id}</p>
       <p>Product Name:{this.props.orderProduct.item_name}</p>
-      <label>Quantity:<input type="text" value={this.props.orderQty} onChange={(event)=>this.props.placeOrderQTY(event.target.value) } required/></label><br></br>
-      <label>Price:<input type="text" value={this.props.orderPrice} onChange={(event)=>this.props.placeOrderPrice(event.target.value)} required/></label><br></br>
+      <label>Quantity:<input type="number" value={this.props.orderQty} onChange={(event)=>this.props.placeOrderQTY(event.target.value) } required/></label><br></br>
+      <label>Price:<input type="number" value={this.props.orderPrice} step="0.01" onChange={(event)=>this.props.placeOrderPrice(event.target.value)} required/></label><br></br>
       <p>Total Dollars:{this.props.orderQty*this.props.orderPrice}</p>
       <label>Vendor Name:<input type="text" value={this.props.orderVendor} onChange={(event)=>this.props.placeOrderVendor(event.target.value)} required/></label><br></br>
       <input type="submit" value="Create Open Order"/>

@@ -26,3 +26,31 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+#centermiddle{
+  top: 50%;
+  margin-top: 10%;
+    width: 40%;
+}
+
+.ui.divided.horizontal.list>.item{
+  border-left: none !important;
+}
+
+html, body{
+  margin: 3px !important;
+}
+
+.my-center{
+  text-align: center;
+  border: 3px solid #009c95;
+  padding: 1em;
+  top: 2em;
+}
+
+.vertical-center{
+  text-align: left !important;
+  top: 10em;
+  position: absolute;
+
+}

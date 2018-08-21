@@ -1,11 +1,11 @@
 import React, {Component,Fragment} from 'react';
-import Navbar from "./Navbar"
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
 import ToDoList from "./ToDoList"
 import UUID from "uuid"
 import Adapter from "./Adapter"
-
+import LogoutButton from "./LogoutButton"
+import MenuOption from "./MenuOption"
 
 class ProfilePage extends Component {
 
@@ -55,23 +55,30 @@ class ProfilePage extends Component {
   render() {
     // console.log("Check to do list", this.props.toDoLists)
     return (<div>
-      <Link to="/home">Home</Link>
-      <Navbar/>
-      Hi,User!
-      <div>Quote of the week: {!this.props.showEditQuoteField ? <Fragment>{this.props.currentUser.quote ? this.props.currentUser.quote : "empty" }<input type="button" value="edit" onClick={this.props.handleEditOption}/></Fragment> :
-        <Fragment><form onSubmit={this.handleSubmitQuote}><input type="text" value={this.props.quoteInput} onChange={(event)=>this.props.handleQuoteInput(event.target.value)} placeholder="Please enter your quote"/>
-          <input type="submit" value="Update" /></form>
+      <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+      <LogoutButton />
+      <MenuOption />
+      <br/>
+      <h2 >Hi,{this.props.currentUser.username}!</h2>
+      <div className="ui teal large message">Quote of the week: {!this.props.showEditQuoteField ? <Fragment>{this.props.currentUser.quote ? this.props.currentUser.quote : "empty" }  <input  className="ui small teal button" type="button" value="edit" onClick={this.props.handleEditOption}/></Fragment> :
+        <Fragment> <form onSubmit={this.handleSubmitQuote}className="ui action input" > <input type="text" value={this.props.quoteInput} onChange={(event)=>this.props.handleQuoteInput(event.target.value)} placeholder="Please enter your quote"/>
+          <input className="ui small teal button" type="submit" value="Update" /></form>
         </Fragment>
     }</div>
-      <h3>Task</h3>
-      <input type="button" value="Create New Task" onClick={this.handleCreateTask}/>
-      <input type="button" value="Create New User" onClick={this.handleCreateUser}/>
-      <input type="button" value="Tasks Created" onClick={this.handleAllTasks}/>
-
-      <ul>
+      <br/>
+      <br/>
+      <input type="button" value="Create New Task"  className="ui small teal button" onClick={this.handleCreateTask}/>
+      {this.props.currentUser.role.toLowerCase().includes("cashier") ? null : <input type="button" value="Create New User" className="ui small teal button" onClick={this.handleCreateUser}/>}
+      <input type="button" value="Tasks Created" className="ui small teal button" onClick={this.handleAllTasks}/>
+      <div class="ui message">
+        <div class="header">
+            To Do List
+        </div>
+      <ul className="list">
         {this.props.toDoLists.map(todolist => <ToDoList todolist={todolist} key={UUID()}/>)}
 
       </ul>
+      </div>
     </div>)
   }
 }

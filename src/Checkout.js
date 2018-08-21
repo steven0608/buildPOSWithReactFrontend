@@ -14,7 +14,7 @@ const Checkout = (props) => {
       const findTranscations = data.find(transcation => transcation.user_id === props.currentUser.id && transcation.total_saving === null)
       const currentTransactionId = findTranscations.id
       const url = "http://localhost:3000/api/v1/products_sales"
-    
+
       let allItemSales=[]
       const today = new Date()
       props.checkoutItems.forEach(item => {
@@ -34,10 +34,12 @@ const Checkout = (props) => {
           if(today.getMonth()<10){
             const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
                     submissionBody.created_at=date
+                    props.addItemSale(submissionBody)
                     allItemSales.push(submissionBody)
           }else {
             const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
                   submissionBody.created_at=date
+                  props.addItemSale(submissionBody)
                   allItemSales.push(submissionBody)
           }
 
@@ -116,7 +118,7 @@ const Checkout = (props) => {
           "$" + (
           (props.customerPay - props.checkoutTotalDollar).toFixed(2))
         }</td>
-        <td><input type="button" value="Print Receipt" onClick={handleReceipt}style={(props.customerPay-props.checkoutTotalDollar)>=0 ? {display:"block"} : {display:"none"}}/></td>
+        <td><input class="positive ui button" type="button" value="Print Receipt" onClick={handleReceipt}style={(props.customerPay-props.checkoutTotalDollar)>=0 ? {display:"block"} : {display:"none"}}/></td>
     </tr>
   </tfoot>)
 }
@@ -159,6 +161,9 @@ function mapDispatchToProps(dispatch) {
     },
     addProductSale:(data)=>{
       dispatch({type: "ADD_PRODUCT_SALE",payload:data})
+    },
+    addItemSale:(data)=>{
+      dispatch({type: "ADD_ITEM_SALE",payload:data})
     },
 
   }

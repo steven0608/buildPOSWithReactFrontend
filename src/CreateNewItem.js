@@ -65,13 +65,13 @@ const CreateNewItem = (props) => {
         <input type="text" value={props.newProductName} onChange={(event) => props.newItemName(event)} required/></label>
       <br></br>
       <label>Retail Price:
-        <input type="text" value={props.retail_price} onChange={(event) => props.newRetailPrice(event)} required/></label>
+        <input type="number" value={props.retail_price} step="0.01" onChange={(event) => props.newRetailPrice(event)} required/></label>
       <br></br>
       <label>Pomo Price:
-        <input type="text" value={props.pomo_price} onChange={(event) => props.newPomoPrice(event)} required/></label>
+        <input type="number" value={props.pomo_price} step="0.01" onChange={(event) => props.newPomoPrice(event)} required/></label>
       <br></br>
       <label>Last Cost:
-        <input type="text" value={props.last_cost} onChange={(event) => props.newLastCost(event)} required/></label>
+        <input type="number" value={props.last_cost} step="0.01" onChange={(event) => props.newLastCost(event)} required/></label>
       <br></br>
       <label>Most Recent Vendor:
         <input type="text" value={props.most_recent_vendor} onChange={(event) => props.newMostRecentVendor(event)}required/></label>

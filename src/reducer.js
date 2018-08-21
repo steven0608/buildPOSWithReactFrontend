@@ -63,6 +63,8 @@ const defaultState = {
   searchItemInput:"",
   searchItemsList:[],
   disableDeleteButton:false,
+  showNavBar:false,
+
 }
 
 export default function(state = defaultState, action) {
@@ -507,6 +509,36 @@ export default function(state = defaultState, action) {
       return{
         ...state,
         allSalesData:[...state.allSalesData,action.payload]
+      }
+      case "ADD_ITEM_SALE":
+      return{
+        ...state,
+        allProductsSales:[...state.allProductsSales,action.payload]
+      }
+      case "LOGOUT":
+      return{
+        ...state,
+      currentUser:"",
+      }
+      case "RESET_USERNAME":
+      return{
+        ...state,
+        usernameInput:"",
+      }
+      case "RESET_PASSWORD":
+      return{
+        ...state,
+        passwordInput:"",
+      }
+      case "SHOW_NAV_BAR":
+      return{
+        ...state,
+        showNavBar:true,
+      }
+      case "NO_SHOW_NAV_BAR":
+      return{
+        ...state,
+        showNavBar:false,
       }
     default:
       return state

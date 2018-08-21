@@ -76,7 +76,7 @@ class Adjustment extends Component {
   render() {
 
     return (<div>
-      <Link to="/home">Home</Link>
+      <Link to="/home"><i className="home icon"></i></Link>
       <Navbar/>
       Hi,User!
       <h1>Create Adjustment</h1>
@@ -86,7 +86,7 @@ class Adjustment extends Component {
       <p>Product Name: {this.props.adjustmentProduct.item_name}</p>
       <p>Last Cost: {this.props.adjustmentProduct.last_cost}</p>
       <p>Total Cost Dollars:{(this.props.adjustmentProduct.last_cost*this.props.adjustmentQty) ? this.props.adjustmentProduct.last_cost*this.props.adjustmentQty : null }</p>
-      <label>Qty to adjust: <input type="text" value={this.props.adjustmentQty} onChange={(event)=>this.props.adjustQty(event.target.value)} required/></label><br></br>
+      <label>Qty to adjust: <input type="number" step="0.01" value={this.props.adjustmentQty} onChange={(event)=>this.props.adjustQty(event.target.value)} required/></label><br></br>
       <label>Reason Code: <input type="text" value={this.props.adjustmenntReasonCode} onChange={(event)=>this.props.adjustmentReason(event.target.value)}required/></label><br></br>
       <input type="submit" value="Create Adjustment"/>
       <br></br>

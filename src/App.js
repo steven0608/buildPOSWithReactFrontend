@@ -17,7 +17,7 @@ import CreateTask from "./Create_Task"
 import CreateUser from "./Create_user"
 import AllTasks from "./AllTasks"
 import CreateNewItem from "./CreateNewItem"
-import {Route, Switch, withRouter} from 'react-router-dom' //use import { Route, Switch, withRouter } from 'react-router-dom' if needed
+import {Route, Switch, withRouter, Redirect} from 'react-router-dom' //use import { Route, Switch, withRouter } from 'react-router-dom' if needed
 import SeeAllOrders from "./SeeAllOrders"
 import ProductOrdersList from "./ProductOrdersList"
 import EditProduct from "./EditProduct"
@@ -46,17 +46,46 @@ class App extends Component {
   getAllOrder = (data) => {
     this.props.fetchAllOrders(data)
   }
+  getCurrentUser = (user,toDoList) => {
+    user.todolists=toDoList
+    const userinfo= user
+    this.props.handleLogin(userinfo)
+  }
   componentDidMount() {
     fetch("http://localhost:3000/api/v1/products").then(r => r.json()).then(data => this.getAllProducts(data))
     fetch("http://localhost:3000/api/v1/sales_transcations").then(r => r.json()).then(data => this.getAllSalesData(data))
     fetch("http://localhost:3000/api/v1/products_sales").then(r => r.json()).then(data => this.getAllProductsSales(data))
     fetch("http://localhost:3000/api/v1/adjustments").then(r=>r.json()).then(data => this.getAllAdjustment(data))
     fetch("http://localhost:3000/api/v1/orders").then(r=>r.json()).then(data => this.getAllOrder(data))
+    let token = localStorage.getItem('token');
+    if(token){
+      fetch("http://localhost:3000/api/v1/current_user",{
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token
+        }
+      }).then(r=>r.json()).then(data=>this.getCurrentUser(data.user_details,data.todolists)).catch(err => {
+
+      			localStorage.removeItem('token')
+      			this.props.history.push('/');
+      		})
+    }
   }
   render() {
     return (<Fragment>
 
       <Route exact path="/" render={(routerProps) => <Login {...routerProps}/>}/>
+      {!localStorage.getItem('token') ? <Redirect to="/" /> : (this.props.currentUser ? this.props.currentUser.role.toLowerCase().includes("cashier") ?
+      <Switch>
+        <Route path="/home" component={(routerProps) => <Navbar {...routerProps}/>}/>
+        <Route path="/profile" component={(routerProps) => <ProfilePage {...routerProps}/>}/>
+        <Route path="/pos" component={Pos}/>
+        <Route path="/items" component={Item}/>
+        <Route path="/chat" component={Chat}/>
+        <Route path="/createtask" component={CreateTask}/>
+        <Route path="/alltasks" component={AllTasks}/>
+      </Switch>
+      :
       <Switch>
         <Route path="/home" component={Navbar}/>
         <Route path="/profile" component={(routerProps) => <ProfilePage {...routerProps}/>}/>
@@ -96,7 +125,8 @@ class App extends Component {
                 	let sales = this.props.allProductsSales.filter(sale => sale.product_id === parseInt(id))
                 	return <SalesSummary {...routerProps} sales={sales}/>
                 }}/>
-      </Switch>
+      </Switch> : null)
+    }
     </Fragment>)
   }
 }
@@ -106,6 +136,7 @@ function mapStateToProps(state) {
   allProducts:state.allProducts,
   allAdjustments:state.allAdjustments,
   allProductsSales:state.allProductsSales,
+  currentUser:state.currentUser,
 }
 }
 
@@ -125,6 +156,9 @@ function mapDispatchToProps(dispatch) {
     },
     fetchAllOrders: (data) =>{
       dispatch({type: "GET_ALL_ORDERS", payload: data})
+    },
+    handleLogin: (user) => {
+      dispatch({type: "SET_USER", payload: user})
     },
   }
 }

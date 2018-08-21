@@ -85,6 +85,9 @@ import Adapter from "./Adapter"
            last_cost:this.props.order.price,
            most_recent_vendor:this.props.order.vendor_name,
          }
+         console.log(currentProduct.order)
+         console.log(this.props.order.qty)
+         // debugger;
          Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
          this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=parseFloat(currentProduct.order)+parseFloat(this.props.order.qty)
          this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty)

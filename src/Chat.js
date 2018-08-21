@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
-import Navbar from "./Navbar"
 import Chatkit from '@pusher/chatkit'
 import MessageList from './MessageList'
 import SendMessageForm from './SendMessageForm'
@@ -9,6 +8,8 @@ import RoomList from './RoomList'
 import NewRoomForm from './NewRoomForm'
 import MYChatkit from '@pusher/chatkit-server'
 import {tokenUrl, instanceLocator, key} from './config'
+import LogoutButton from "./LogoutButton"
+import MenuOption from "./MenuOption"
 
 class Chat extends Component {
 
@@ -104,10 +105,17 @@ class Chat extends Component {
     }).catch(err => console.log('error with createRoom: ', err))
   }
 
+  // <Link to="/home">Home</Link>
+  // <Navbar/>
   render() {
-    return (<div className="app">
-      <Link to="/home">Home</Link>
-      <Navbar/>
+    return (
+      <Fragment>
+      <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+      <LogoutButton />
+      <MenuOption />
+      <br/>
+      <div className="app">
+
       <RoomList subscribeToRoom={this.subscribeToRoom} rooms={[
           ...this.state.joinableRooms,
           ...this.state.joinedRooms
@@ -115,7 +123,9 @@ class Chat extends Component {
       <MessageList roomId={this.state.roomId} messages={this.state.messages}/>
       <SendMessageForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
       <NewRoomForm createRoom={this.createRoom}/>
-    </div>);
+    </div>
+</Fragment>
+  );
   }
 }
 

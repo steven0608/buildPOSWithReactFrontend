@@ -25,12 +25,12 @@ class ProductSale extends Component {
     // console.log("check input",this.props.checkoutItem)
     return (<tr>
       <td>{this.props.checkoutItem.item_name}</td>
-      <td><input type="number" value={this.props.checkoutItem.checkoutqty} onChange={this.handleQtyInput}/></td>
+      <td><input type="number" value={this.props.checkoutItem.checkoutqty} step="0.01" onChange={this.handleQtyInput}/></td>
       <td>{this.props.checkoutItem.retail_price}</td>
       <td>{this.props.checkoutItem.pomo_price}</td>
       <td>{this.props.checkoutItem.totalDollars}</td>
       <td>{this.props.checkoutItem.totalSavings}</td>
-      <td><button onClick={this.handleDelete} disabled={this.props.disableDeleteButton}> delete</button></td>
+      <td><button className="negative ui button" onClick={this.handleDelete} disabled={this.props.disableDeleteButton}> delete</button></td>
     </tr>)
   }
 }
