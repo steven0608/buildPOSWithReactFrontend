@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux"
 import OrderList from "./OrderList"
+import LogoutButton from "./LogoutButton"
+import MenuOption from "./MenuOption"
+import {Link} from 'react-router-dom'
 
 
 const SeeAllOrders=(props)=>{
@@ -41,15 +44,24 @@ function handleSubmitOrderSearch(event) {
 
 }
   return(<div>
-      <form onSubmit={handleSubmitOrderSearch}>
+    <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+    <LogoutButton />
+    <MenuOption />
+    <br></br>
+    <br></br>
+      <form onSubmit={handleSubmitOrderSearch} className="input-center">
       <div onChange={handleRadioButton}>
-      <label><input type="radio" value="All Order" name="All Order" checked={props.filterOption === "All Order"}/>All Order</label>
-      <label><input type="radio" value="On Order" name="On Order" checked={props.filterOption === "On Order"}/>On Order</label>
-      <label><input type="radio" value="Received" name="Received" checked={props.filterOption === "Received"}/>Received</label>
+      <label><input type="radio" value="All Order" name="All Order" checked={props.filterOption === "All Order"}/>&nbsp;&nbsp;All Order</label>&nbsp;&nbsp;
+      <label><input type="radio" value="On Order" name="On Order" checked={props.filterOption === "On Order"}/>&nbsp;&nbsp;On Order</label>&nbsp;&nbsp;
+      <label><input type="radio" value="Received" name="Received" checked={props.filterOption === "Received"}/>&nbsp;&nbsp;Received</label>&nbsp;&nbsp;
       </div>
+
       <input type="text" value={props.ordersSearchInput} onChange={(event)=>props.inputOrdersSearch(event.target.value)} placeholder="search by item name" />
       <input type="submit" value="Search"/>
+
       </form>
+      <br></br>
+      <br></br>
       <OrderList />
     </div>)
 }

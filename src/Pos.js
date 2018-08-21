@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
-import Navbar from "./Navbar"
 import Adapter from "./Adapter"
 import ProductSale from "./ProductSale"
 import UUID from "uuid"
 import Checkout from "./Checkout"
+import LogoutButton from "./LogoutButton"
+import MenuOption from "./MenuOption"
+
 
 class Pos extends Component {
 
@@ -48,17 +50,21 @@ class Pos extends Component {
     }
 
   }
+
   render() {
 
     return (<div>
-      <Link to="/home">Home</Link>
-      <Navbar/>
+      <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+      <LogoutButton />
+      <MenuOption />
+      <br></br>
       <br></br>
       <form onSubmit={this.handleAddToCart}>
-        <label>Add Items:
-          <input type="text" value={this.props.checkoutItemInput} onChange={(event) => this.props.handlecheckoutItemInput(event)}/></label>
-        <input class="positive ui button" type="submit" value="add to cart"/>
+      <label><a className="ui label large teal"><i className="add icon"></i>Add Items:</a>
+          <div className="ui input"><input type="text" value={this.props.checkoutItemInput} placeholder="Enter barcode or Name" onChange={(event) => this.props.handlecheckoutItemInput(event)}/></div></label>
+        <input className="positive ui button" type="submit" value="add to cart"/>
       </form>
+      <br></br>
       <table>
         <thead>
           <tr>
@@ -86,6 +92,7 @@ class Pos extends Component {
           }
         </tbody>
       </table>
+      <br></br>
       <div className="ui left action input">
       <button className="ui teal labeled icon button" onClick={this.currentTransaction}>
       <i className="cart icon"></i>

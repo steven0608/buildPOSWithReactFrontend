@@ -72,10 +72,11 @@ class App extends Component {
     }
   }
   render() {
+    
     return (<Fragment>
 
       <Route exact path="/" render={(routerProps) => <Login {...routerProps}/>}/>
-      {!localStorage.getItem('token') ? <Redirect to="/" /> : (this.props.currentUser ? this.props.currentUser.role.toLowerCase().includes("cashier") ?
+      {!localStorage.getItem('token') && this.props.history.location.pathname!=="/" ? <Redirect to="/" /> : (this.props.currentUser ? this.props.currentUser.role.toLowerCase().includes("cashier") ?
       <Switch>
         <Route path="/home" component={(routerProps) => <Navbar {...routerProps}/>}/>
         <Route path="/profile" component={(routerProps) => <ProfilePage {...routerProps}/>}/>

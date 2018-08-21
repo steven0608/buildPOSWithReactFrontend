@@ -1,8 +1,12 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import ToDoList from "./ToDoList"
 import {connect} from "react-redux"
 import UUID from "uuid"
 import Adapter from "./Adapter"
+import {Link} from 'react-router-dom'
+import LogoutButton from "./LogoutButton"
+import MenuOption from "./MenuOption"
+
 
 const AllTasks = (props) => {
 
@@ -20,13 +24,22 @@ const AllTasks = (props) => {
     Adapter.deleteRequest(url, "DELETE")
   }
 
-  return (<ul>
+
+
+  return (
+    <Fragment>
+    <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+    <LogoutButton />
+    <MenuOption />
+
+    <ul className="ui cards">
     {
-      props.currentUser.todolists.map(todolist => <div key={UUID()}><ToDoList todolist={todolist} name="allTasks"/>
-        <button name={todolist.id} onClick={handleDeleteTask}>Delete</button>
+      props.currentUser.todolists.map(todolist => <div className="card" key={UUID()}><ToDoList todolist={todolist} name="allTasks"/>
+        <button className="ui bottom attached button" name={todolist.id} onClick={handleDeleteTask}><i class="trash alternate icon"></i> Delete</button>
       </div>)
     }
-  </ul>)
+  </ul>
+</Fragment>)
 
 }
 

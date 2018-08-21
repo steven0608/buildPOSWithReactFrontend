@@ -4,6 +4,11 @@ import {connect} from "react-redux"
 import UUID from "uuid"
 import firebase from "firebase/app"
 import "firebase/storage"
+import {Link} from 'react-router-dom'
+import MenuOption from "./MenuOption"
+import LogoutButton from "./LogoutButton"
+
+
 
 const CreateNewItem = (props) => {
 
@@ -59,54 +64,59 @@ const CreateNewItem = (props) => {
   }
 
   return (<div>
+    <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+    <LogoutButton />
+    <MenuOption />
+
     <h1>Create New Item From</h1>
     <form onSubmit={handleCreateNewItem}>
-      <label>Item Name:
-        <input type="text" value={props.newProductName} onChange={(event) => props.newItemName(event)} required/></label>
-      <br></br>
-      <label>Retail Price:
-        <input type="number" value={props.retail_price} step="0.01" onChange={(event) => props.newRetailPrice(event)} required/></label>
-      <br></br>
-      <label>Pomo Price:
-        <input type="number" value={props.pomo_price} step="0.01" onChange={(event) => props.newPomoPrice(event)} required/></label>
-      <br></br>
-      <label>Last Cost:
-        <input type="number" value={props.last_cost} step="0.01" onChange={(event) => props.newLastCost(event)} required/></label>
-      <br></br>
-      <label>Most Recent Vendor:
-        <input type="text" value={props.most_recent_vendor} onChange={(event) => props.newMostRecentVendor(event)}required/></label>
-      <br></br>
-      <label>unit:
-        <input type="text" value={props.unit} onChange={(event) => props.newProductUnit(event.target.value)}required/></label>
-      <br></br>
-      <label>Status:
-        <input type="text" value={props.status} onChange={(event) => props.newStatus(event)}required/></label>
-      <br></br>
-      <label>Forecast Sales For The Next 3 Months:
-        <input type="text" value={props.forecast_sales_three_months} onChange={(event) => props.newForecast(event)}/></label>
-      <br></br>
-      <label>Need To Order For The Next 3 Months:
-        <input type="text" value={props.need_to_order_for_next_three_months} onChange={(event) => props.newNeedToOrder(event)}/></label>
-      <br></br>
-      <label>Annualized Sales:
-        <input type="text" value={props.annualized_sales} onChange={(event) => props.newAnnualizedSales(event)}/></label>
-      <br></br>
-      <label>annualized QTY:
-        <input type="text" value={props.annualized_qty} onChange={(event) => props.newAnnualizedQty(event)}/></label>
-      <br></br>
-      <label>Upload Product Image:
+      <p><label>Item Name:
+        <input type="text" value={props.newProductName} onChange={(event) => props.newItemName(event)} required/></label></p>
+
+      <p><label>Retail Price:
+        <input type="number" value={props.retail_price} step="0.01" onChange={(event) => props.newRetailPrice(event)} required/></label></p>
+
+      <p><label>Pomo Price:
+        <input type="number" value={props.pomo_price} step="0.01" onChange={(event) => props.newPomoPrice(event)} required/></label></p>
+
+      <p><label>Last Cost:
+        <input type="number" value={props.last_cost} step="0.01" onChange={(event) => props.newLastCost(event)} required/></label></p>
+
+      <p><label>Most Recent Vendor:
+        <input type="text" value={props.most_recent_vendor} onChange={(event) => props.newMostRecentVendor(event)}required/></label></p>
+
+      <p><label>unit:
+        <input type="text" value={props.unit} onChange={(event) => props.newProductUnit(event.target.value)}required/></label></p>
+
+      <p><label>Status:
+        <input type="text" value={props.status} onChange={(event) => props.newStatus(event)}required/></label></p>
+
+      <p><label>Forecast Sales For The Next 3 Months:
+        <input type="text" value={props.forecast_sales_three_months} onChange={(event) => props.newForecast(event)}/></label></p>
+
+      <p><label>Need To Order For The Next 3 Months:
+        <input type="text" value={props.need_to_order_for_next_three_months} onChange={(event) => props.newNeedToOrder(event)}/></label></p>
+
+      <p><label>Annualized Sales:
+        <input type="text" value={props.annualized_sales} onChange={(event) => props.newAnnualizedSales(event)}/></label></p>
+
+      <p><label>annualized QTY:
+        <input type="text" value={props.annualized_qty} onChange={(event) => props.newAnnualizedQty(event)}/></label></p>
+
+      <p><label>Upload Product Image:
         <input type="file" onChange={(event) => props.newImage_url(event)}/></label>
-      <button onClick={uploadHandler}>Upload</button>
-      <br></br>
-      <label>Category:
-        <input type="text" value={props.category} onChange={(event) => props.newCategory(event)}required/></label>
-      <br></br>
-      <label>Barcode:
-        <input type="text" value={props.barcode} onChange={(event) => props.newBarcode(event)}required/></label>
-      <br></br>
+      <button onClick={uploadHandler} className="ui tiny teal button">Click to Upload</button></p>
+
+      <p><label>Category:
+        <input type="text" value={props.category} onChange={(event) => props.newCategory(event)}required/></label></p>
+
+      <p><label>Barcode:
+        <input type="text" value={props.barcode} onChange={(event) => props.newBarcode(event)}required/></label></p>
+
       <input type="submit" value="Create New Item"/>
     </form>
-    <img id="preview" src={props.image_url} height="222" width="332" alt="Please Click Upload"/>
+    {props.image_url ? <img id="preview" src={props.image_url} height="222" width="332" alt="Please Click Upload"/> : null}
+    
   </div>)
 
 }

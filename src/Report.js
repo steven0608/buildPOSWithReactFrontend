@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
-import Navbar from "./Navbar"
 import DisplayData from "./DisplayData"
 import UUID from "uuid"
+import MenuOption from "./MenuOption"
+import LogoutButton from "./LogoutButton"
 
 class Report extends Component {
 
@@ -23,17 +24,20 @@ class Report extends Component {
   }
   render() {
     return (<div>
-      <Link to="/home">Home</Link>
-      <Navbar/>
-      <form onSubmit={this.filterData}>
-        <label>From<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeFrom} onChange={(event) => this.props.changeDataRangeFrom(event)} required/></label>
-        <label>To<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeTo} onChange={(event) => this.props.changeDataRangeTo(event)} required/></label>
+      <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+      <LogoutButton />
+      <MenuOption />
+      <form onSubmit={this.filterData} className="center-SalesSummary">
+        <label>From&nbsp;&nbsp;<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeFrom} onChange={(event) => this.props.changeDataRangeFrom(event)} required/></label>
+        <label>&nbsp;&nbsp;To&nbsp;&nbsp;<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeTo} onChange={(event) => this.props.changeDataRangeTo(event)} required/></label>
         <input type="submit" value="Get Sales Data"/>
       </form>
       {
         this.props.reportData.length === 0
           ? null
-          : <table>
+          :
+          <div className="center-SalesSummary">
+          <table className="ui teal table">
               <thead>
                 <tr>
                   <th>Product Name</th>
@@ -56,6 +60,7 @@ class Report extends Component {
                 }
               </tbody>
             </table>
+            </div>
       }
     </div>)
   }

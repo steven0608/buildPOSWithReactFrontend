@@ -1,58 +1,4 @@
-// import React from 'react';
 import {connect} from "react-redux"
-
-// const DisplayOrder = (props) => {
-//
-//   function processReceiving() {
-//     console.log("try this",props.filterOrders[props.filterOrders.indexOf(props.order)].received)
-//     props.filterOrders[props.filterOrders.indexOf(props.order)].on_order=false
-//     props.filterOrders[props.filterOrders.indexOf(props.order)].received=true
-//       props.processFilterOrders(props.filterOrders)
-//
-//
-//     props.allOrders[props.allOrders.indexOf(props.order)].on_order=false
-//     props.allOrders[props.allOrders.indexOf(props.order)].received=true
-//       props.processAllOrders(props.allOrders)
-//
-//
-//   }
-//   return(<li>
-//     <p>Product Name:{props.order.product_name}</p>
-//     <p><img src={props.allProducts.find(product=>product.id === props.order.product_id).image_url} alt="" height="222" width="332"/></p>
-//     <p>Quantity:{props.order.qty}</p>
-//     <p>Price:{props.order.price}</p>
-//     <p>Total Dollars:{props.order.total_dollars}</p>
-//     <p>Vendor Name:{props.order.vendor_name}</p>
-//     <p>Order By:{props.order.order_by}</p>
-//     <p>Received By:{props.order.received_by}</p>
-//     <p>Order Created Date:{props.order.created_at.slice(0,10)}</p>
-//     <p>Click To Confirm Product Received:{props.order.received ? "Received Already!" : <button onClick={processReceiving}>On Order</button> }</p>
-//     </li>)
-// }
-
-// function mapStateToProps(state) {
-//   return {
-//     currentUser: state.currentUser,
-//     allProducts:state.allProducts,
-//     filterOrders:state.filterOrders,
-//     allOrders:state.allOrders,
-//   }
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     inputFilterOption: (data) => {
-//       dispatch({type: "ORDER_RADIO_BUTTON", payload: data})
-//     },
-//     processFilterOrders: (data) => {
-//       dispatch({type: "UPDATE_FILTER_ORDERS", payload: data})
-//     },
-//     processAllOrders: (data) => {
-//       dispatch({type: "UPDATE_ALL_ORDERS", payload: data})
-//     },
-//   }
-// }
-
 import React, { Component } from 'react';
 import Adapter from "./Adapter"
 
@@ -97,18 +43,21 @@ import Adapter from "./Adapter"
 
    }
    render(){
-   return(<li>
-     <p>Product Name:{this.props.order.product_name}</p>
-     <p><img src={this.props.allProducts.find(product=>product.id === this.props.order.product_id).image_url} alt="" height="222" width="332"/></p>
-     <p>Quantity:{this.props.order.qty}</p>
-     <p>Price:{this.props.order.price}</p>
-     <p>Total Dollars:{this.props.order.total_dollars}</p>
-     <p>Vendor Name:{this.props.order.vendor_name}</p>
-     <p>Order By:{this.props.order.order_by}</p>
-     <p>Received By:{this.props.order.received_by}</p>
-     <p>Order Created Date:{this.props.order.created_at.slice(0,10)}</p>
-     {this.props.order.received ? <p>Received Already!</p> : <p>Click To Confirm Product Received:<button onClick={this.processReceiving}>On Order</button></p>}
-     </li>)
+   return(<div className="card">
+   <div className="image" id="center-order-card">
+   <span></span>
+     <h3>{this.props.order.product_name}</h3>
+     <center ><img className="ui Mini rounded image" src={this.props.allProducts.find(product=>product.id === this.props.order.product_id).image_url} alt="" height="222" width="332"/></center>
+     <div>Quantity:{this.props.order.qty}</div>
+     <div>Price:{this.props.order.price}</div>
+     <div>Total Dollars:{this.props.order.total_dollars}</div>
+     <div>Vendor Name:{this.props.order.vendor_name}</div>
+     <div>Order By:{this.props.order.order_by}</div>
+     <div>Received By:{this.props.order.received_by}</div>
+     <div>Order Created Date:{this.props.order.created_at.slice(0,10)}</div>
+     {this.props.order.received ? <h4>Received Already!</h4> : <div><button className="ui teal button" onClick={this.processReceiving}>Click To Confirm Product Received</button></div>}
+     </div>
+     </div>)
      }
  }
 

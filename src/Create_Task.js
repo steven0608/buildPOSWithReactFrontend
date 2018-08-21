@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
 import Adapter from "./Adapter"
+import LogoutButton from "./LogoutButton"
+import MenuOption from "./MenuOption"
 
 class CreateTask extends Component {
 
@@ -29,6 +32,10 @@ class CreateTask extends Component {
   render() {
 
     return (<div>
+      <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+      <LogoutButton />
+      <MenuOption />
+
       <h2>Create a task for your team member</h2>
       <div>Selected Member:</div>
       <ul></ul>

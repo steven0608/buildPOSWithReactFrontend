@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import Adapter from "./Adapter"
 import {connect} from "react-redux"
 
@@ -32,35 +32,65 @@ const ToDoList = (props) => {
     })
   }
 
-  return (<li id={"list" + props.todolist.id} style={props.todolist.task_completed
-      ? {
-        color: "#000066"
-      }
-      : {
-        color: "#ff0000"
-      }
-}>
-    Task From {props.todolist.create_by}
-    To {props.todolist.to_username}
-    :{props.todolist.message}
-    {
-      props.name
-        ? null
-        : <button id={props.todolist.id} style={props.todolist.task_completed
-              ? {
-                color: "#000066"
-              }
-              : {
-                color: "#ff0000"
-              }
-} onClick={handleTaskCompleted}>{
-              props.todolist.task_completed
-                ? "Completed"
-                : "Not Completed"
-            }</button>
-    }</li>)
+
+  return (
+    <Fragment>{!props.name ?
+      <Fragment>
+      <li id={"list" + props.todolist.id} style={props.todolist.task_completed
+        ? {
+          color: "#000066"
+        }
+        : {
+          color: "#ff0000"
+        }
+  }>
+      Task From {props.todolist.create_by}
+      To {props.todolist.to_username}
+      :{props.todolist.message}
+      {
+        props.name
+          ? null
+          : <button id={props.todolist.id} style={props.todolist.task_completed
+                ? {
+                  color: "#000066"
+                }
+                : {
+                  color: "#ff0000"
+                }
+  } onClick={handleTaskCompleted}>{
+                props.todolist.task_completed
+                  ? "Completed"
+                  : "Not Completed"
+              }</button>
+      }</li>
+      </Fragment>
+      :
+      <Fragment>
+      <div id={"list" + props.todolist.id} className="content">
+      <div className="header" >Task To {props.todolist.to_username===props.todolist.create_by ? "Yourself" : props.todolist.to_username}<div style={props.todolist.task_completed
+        ? {
+          color: "#000066"
+        }
+        : {
+          color: "#ff0000"
+        }
+  }>{props.todolist.task_completed ? "(Completed)" :"(Not Completed)"}</div></div>
+      <div className="description">{props.todolist.message}</div>
+      </div>
+      </Fragment>
+}
+</Fragment>
+  )
 
 }
+
+
+// <div class="content">
+//      <div class="header">Elliot Fu</div>
+//      <div class="description">
+//        Elliot Fu is a film-maker from New York.
+//      </div>
+//    </div>
 
 function mapStateToProps(state) {
   return {toDoLists: state.toDoLists, currentUser: state.currentUser}

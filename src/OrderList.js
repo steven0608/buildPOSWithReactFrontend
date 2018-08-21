@@ -5,11 +5,11 @@ import UUID from "uuid"
 
 
 const OrderList=(props)=>{
-  console.log("check filter Orders",props.filterOrders)
-  return(<ul>
+
+  return(<div className="ui four centered cards">
     {props.filterOrders ? props.filterOrders.map(order=>
     <DisplayOrder order={order} key={UUID()}/>) : null}
-  </ul>)
+  </div>)
 }
 
 function mapStateToProps(state) {

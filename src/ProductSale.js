@@ -30,7 +30,7 @@ class ProductSale extends Component {
       <td>{this.props.checkoutItem.pomo_price}</td>
       <td>{this.props.checkoutItem.totalDollars}</td>
       <td>{this.props.checkoutItem.totalSavings}</td>
-      <td><button className="negative ui button" onClick={this.handleDelete} disabled={this.props.disableDeleteButton}> delete</button></td>
+      <td><button className="negative ui button" onClick={this.handleDelete} disabled={this.props.disableDeleteButton}> <i class="trash alternate icon"></i>delete</button></td>
     </tr>)
   }
 }

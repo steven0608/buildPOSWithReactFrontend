@@ -1,6 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import Adapter from "./Adapter"
+import {Link} from 'react-router-dom'
+import LogoutButton from "./LogoutButton"
+import MenuOption from "./MenuOption"
 
 // don't need chatid in our db since username is unique
 class CreateUser extends Component {
@@ -25,6 +28,9 @@ class CreateUser extends Component {
 
   render() {
     return (<Fragment>
+      <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+      <LogoutButton />
+      <MenuOption />
       <h2>Create a User</h2>
       <form onSubmit={this.handleCreateUserSubmit}>
         <label>Username:<input type="text" value={this.props.newUser_username} onChange={(event) => this.props.handleNewUserUsernameInput(event)} required/></label>

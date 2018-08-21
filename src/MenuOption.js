@@ -9,7 +9,7 @@ const MenuOption = (props)=>{
     <div className="ui animated center floated teal button" tabIndex="0" onMouseOver={props.ShowNavBar} >
   <div className="visible content">Next</div>
   <div className="hidden content">
-    <i className="right arrow icon"><Navbar/></i>
+    <i className="right arrow icon"></i>
   </div>
   </div>
 {props.showNavBar ? <Navbar/> :null}

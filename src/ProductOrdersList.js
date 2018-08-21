@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {connect} from "react-redux"
 import UUID from "uuid"
 import ProductOrder from "./ProductOrder"
+import LogoutButton from "./LogoutButton"
+import MenuOption from "./MenuOption"
+import {Link} from 'react-router-dom'
 
 
 class ProductOrdersList extends Component {
@@ -43,16 +46,21 @@ class ProductOrdersList extends Component {
 
 
  render() {
-  
+
 return (<div>
-  <img src={this.props.allProducts.find(product=> product.id === parseInt(this.props.match.params.id,10)).image_url} alt="" height="222" width="332"/>
+  <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+  <LogoutButton />
+  <MenuOption />
+  <br></br>
+  <br></br>
+  <img className="ui large rounded image centered" src={this.props.allProducts.find(product=> product.id === parseInt(this.props.match.params.id,10)).image_url} alt="" height="222" width="332"/>
   <form onSubmit={this.handleSubmitOrderSearch}>
 
-  <label><input type="radio" value="All Order" name="All Order" checked={this.props.productOrderRadio === "All Order"} onChange={this.handleRadioButton}/>All Order</label>
-  <label><input type="radio" value="On Order" name="On Order" checked={this.props.productOrderRadio === "On Order"} onChange={this.handleRadioButton}/>On Order</label>
-  <label><input type="radio" value="Received" name="Received" checked={this.props.productOrderRadio === "Received"} onChange={this.handleRadioButton} />Received</label>
+  <label><input type="radio" value="All Order" name="All Order" checked={this.props.productOrderRadio === "All Order"} onChange={this.handleRadioButton}/>&nbsp;&nbsp;All Order&nbsp;&nbsp;</label>
+  <label><input type="radio" value="On Order" name="On Order" checked={this.props.productOrderRadio === "On Order"} onChange={this.handleRadioButton}/>&nbsp;&nbsp;On Order&nbsp;&nbsp;</label>
+  <label><input type="radio" value="Received" name="Received" checked={this.props.productOrderRadio === "Received"} onChange={this.handleRadioButton} />&nbsp;&nbsp;Received</label>
 
-  <label>Filter By Order Date:<input type="text" value={this.props.productOrdersSearchInput} onChange={(event)=>this.props.handleProductOrdersSearchInput(event.target.value)} placeholder="YYYY-MM-DD" /></label>
+  <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter By Order Date:<input type="text" value={this.props.productOrdersSearchInput} onChange={(event)=>this.props.handleProductOrdersSearchInput(event.target.value)} placeholder="YYYY-MM-DD" /></label>
   <input type="submit" value="Search"/>
   </form>
   <ul>

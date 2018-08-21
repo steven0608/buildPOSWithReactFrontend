@@ -54,3 +54,24 @@ html, body{
   position: absolute;
 
 }
+
+#create-small-margin{
+  margin: 1em;
+}
+
+#search-Item{
+  text-align: center;
+}
+
+.input-center{
+  text-align: center;
+}
+
+#center-order-card{
+  text-align: center;
+}
+.center-SalesSummary{
+  width: 35%;
+  margin-left:auto;
+  margin-right:auto;
+}

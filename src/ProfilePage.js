@@ -70,8 +70,8 @@ class ProfilePage extends Component {
       <input type="button" value="Create New Task"  className="ui small teal button" onClick={this.handleCreateTask}/>
       {this.props.currentUser.role.toLowerCase().includes("cashier") ? null : <input type="button" value="Create New User" className="ui small teal button" onClick={this.handleCreateUser}/>}
       <input type="button" value="Tasks Created" className="ui small teal button" onClick={this.handleAllTasks}/>
-      <div class="ui message">
-        <div class="header">
+      <div className="ui message">
+        <div className="header">
             To Do List
         </div>
       <ul className="list">

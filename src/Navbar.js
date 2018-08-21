@@ -35,7 +35,7 @@ if (!!this.props.history) {
   </div>
       </div>
       <div className="item">
-        <Link to="/chat" className="ui small circular image"><img src="https://banner2.kisspng.com/20171203/29f/chat-free-download-png-5a24ae446630e4.9638134815123533484186.jpg" alt=""/></Link>
+        <Link to="/chat" className="ui small circular image"><img src="https://dyu6wqeoj83rj.cloudfront.net/blog/wp-content/uploads/2017/06/29-06-2017_1-300x300.png" alt=""/></Link>
         <div className="content">
     <div className="header">Chat Room</div>
   </div>
@@ -68,13 +68,13 @@ if (!!this.props.history) {
   </div>
       </div>
       <div className="item">
-        <Link to="/chat" className="ui small circular image"><img src="https://banner2.kisspng.com/20171203/29f/chat-free-download-png-5a24ae446630e4.9638134815123533484186.jpg" alt=""/></Link>
+        <Link to="/chat" className="ui small circular image"><img src="https://dyu6wqeoj83rj.cloudfront.net/blog/wp-content/uploads/2017/06/29-06-2017_1-300x300.png" alt=""/></Link>
         <div className="content">
     <div className="header">Chat Room</div>
   </div>
       </div>
       <div className="item">
-        <Link to="/adjustments" className="ui small circular image"><img src="https://image.freepik.com/free-photo/adjust-button_2302199.jpg" alt=""/></Link>
+        <Link to="/adjustments" className="ui small circular image"><img src="https://image.flaticon.com/icons/svg/61/61043.svg" alt=""/></Link>
         <div className="content">
     <div className="header">Adjustment</div>
   </div>
@@ -110,7 +110,7 @@ if (!!this.props.history) {
       </div>
 
       <div className="item">
-        <Link to="/chat" className="ui tiny circular image"><img src="https://banner2.kisspng.com/20171203/29f/chat-free-download-png-5a24ae446630e4.9638134815123533484186.jpg" alt=""/></Link>
+        <Link to="/chat" className="ui tiny circular image"><img src="https://dyu6wqeoj83rj.cloudfront.net/blog/wp-content/uploads/2017/06/29-06-2017_1-300x300.png" alt=""/></Link>
       </div>
     </div>
     :
@@ -129,10 +129,10 @@ if (!!this.props.history) {
         <Link to="/items" className="ui tiny circular image"><img src="https://static1.squarespace.com/static/52b6128ce4b067a0f5987a3a/t/531e0c0de4b089910ebb2224/1394478094498/Product_icon.png" alt=""/></Link>
   </div>
       <div className="item">
-        <Link to="/chat" className="ui tiny circular image"><img src="https://banner2.kisspng.com/20171203/29f/chat-free-download-png-5a24ae446630e4.9638134815123533484186.jpg" alt=""/></Link>
+        <Link to="/chat" className="ui tiny circular image"><img src="https://dyu6wqeoj83rj.cloudfront.net/blog/wp-content/uploads/2017/06/29-06-2017_1-300x300.png" alt=""/></Link>
       </div>
       <div className="item">
-        <Link to="/adjustments" className="ui tiny circular image"><img src="https://image.freepik.com/free-photo/adjust-button_2302199.jpg" alt=""/></Link>
+        <Link to="/adjustments" className="ui tiny circular image"><img src="https://image.flaticon.com/icons/svg/61/61043.svg" alt=""/></Link>
       </div>
       <div className="item">
         <Link to="/orders" className="ui tiny circular image"><img src="http://www.miracleleaguect.org/files/Order%2BRaw%2BFood%2BIndulgence.png" alt=""/></Link>
