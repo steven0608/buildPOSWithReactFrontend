@@ -47,11 +47,11 @@ const Checkout = (props) => {
         const productUrl="http://localhost:3000/api/v1/products/"+item.id
         let productSubmissionBody = {
           inventory:item.inventory-item.checkoutqty,
-          sales:item.sales+item.checkoutqty
+          sales:parseFloat(item.sales)+parseFloat(item.checkoutqty)
         }
 
         props.allProducts[props.allProducts.indexOf(item)].inventory=item.inventory-item.checkoutqty
-        props.allProducts[props.allProducts.indexOf(item)].sales=item.sales+item.checkoutqty
+        props.allProducts[props.allProducts.indexOf(item)].sales=parseFloat(item.sales)+parseFloat(item.checkoutqty)
         props.updateAllProducts(props.allProducts)
         Adapter.fetchRequest(productUrl, productSubmissionBody, "PATCH")
         return Adapter.fetchRequest(url, submissionBody, "POST")
@@ -118,7 +118,7 @@ const Checkout = (props) => {
           "$" + (
           (props.customerPay - props.checkoutTotalDollar).toFixed(2))
         }</td>
-        <td><input class="positive ui button" type="button" value="Print Receipt" onClick={handleReceipt}style={(props.customerPay-props.checkoutTotalDollar)>=0 ? {display:"block"} : {display:"none"}}/></td>
+        <td><input className="positive ui button" type="button" value="Print Receipt" onClick={handleReceipt}style={(props.customerPay-props.checkoutTotalDollar)>=0 ? {display:"block"} : {display:"none"}}/></td>
     </tr>
   </tfoot>)
 }

@@ -3,13 +3,22 @@ import {connect} from "react-redux"
 
 class ProductSale extends Component {
   state = {
-    userInput: 1
+    userInput: this.props.checkoutItem.checkoutqty
   }
 
   handleQtyInput = (event) => {
     // const item=this.props.checkoutItems.find(checkoutItem=>checkoutItem.id === this.props.checkoutItem.id)
     // eslint-disable-next-line
-    const qtyInput = parseInt(event.target.value)
+    let qtyInput;
+    if(parseFloat(event.target.value)){
+      console.log(event.target.value)
+      qtyInput=parseFloat(event.target.value)
+      console.log(parseFloat(event.target.value))
+    }else {
+      qtyInput=0
+    }
+
+
     this.setState({userInput: qtyInput})
     this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].checkoutqty = qtyInput
     this.props.checkoutItems[this.props.checkoutItems.indexOf(this.props.checkoutItem)].totalDollars = (this.props.checkoutItem.pomo_price * qtyInput).toFixed(2)
@@ -25,12 +34,13 @@ class ProductSale extends Component {
     // console.log("check input",this.props.checkoutItem)
     return (<tr>
       <td>{this.props.checkoutItem.item_name}</td>
-      <td><input type="number" value={this.props.checkoutItem.checkoutqty} step="0.01" onChange={this.handleQtyInput}/></td>
+      <td><input type="number" step=".01" value={this.state.userInput} onChange={this.handleQtyInput}/></td>
       <td>{this.props.checkoutItem.retail_price}</td>
       <td>{this.props.checkoutItem.pomo_price}</td>
       <td>{this.props.checkoutItem.totalDollars}</td>
       <td>{this.props.checkoutItem.totalSavings}</td>
-      <td><button className="negative ui button" onClick={this.handleDelete} disabled={this.props.disableDeleteButton}> <i class="trash alternate icon"></i>delete</button></td>
+      <td><button className="negative ui button" onClick={this.handleDelete} disabled={this.props.disableDeleteButton}> <i className="trash alternate icon"></i>delete</button></td>
+      {this.state.userInput<0 ? <td><button className="negative ui button">Return</button></td> :null }
     </tr>)
   }
 }

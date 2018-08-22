@@ -37,7 +37,7 @@ class Item extends Component {
     </div>
 
       <div className="ui four cards" id="create-small-margin">
-          {this.props.searchItemsList.length === 0 ? this.props.allProducts.map(product => <Card product={product} key={UUID()}/>) :
+          {this.props.searchItemsList.length === 0 && this.props.searchItemInput.length<1 ? this.props.allProducts.map(product => <Card product={product} key={UUID()}/>) :
             this.props.searchItemsList.map(product => <Card product={product} key={UUID()}/>)
         }
       </div>

@@ -37,16 +37,16 @@ class Adjustment extends Component {
     Adapter.fetchRequest(url,submissionBody,"POST").then(()=>{
       const productUrl="http://localhost:3000/api/v1/products/"+this.props.adjustmentProduct.id
       const productSubmissionBody={
-        // eslint-disable-next-line
-        inventory:(parseInt(this.props.adjustmentProduct.inventory)+parseInt(this.props.adjustmentQty)),
-        // eslint-disable-next-line
-        adjustment:(parseInt(this.props.adjustmentProduct.adjustment)+parseInt(this.props.adjustmentQty)),
+
+        inventory:(parseFloat(this.props.adjustmentProduct.inventory)+parseFloat(this.props.adjustmentQty)).toFixed(2),
+
+        adjustment:(parseFloat(this.props.adjustmentProduct.adjustment)+parseFloat(this.props.adjustmentQty)).toFixed(2),
       }
       console.log("check",this.props.allProducts.indexOf(this.props.adjustmentProduct))
       // eslint-disable-next-line
-      this.props.allProducts[this.props.allProducts.indexOf(this.props.adjustmentProduct)].inventory=(parseInt(this.props.adjustmentProduct.inventory)+parseInt(this.props.adjustmentQty))
+      this.props.allProducts[this.props.allProducts.indexOf(this.props.adjustmentProduct)].inventory=(parseFloat(this.props.adjustmentProduct.inventory)+parseFloat(this.props.adjustmentQty)).toFixed(2)
       // eslint-disable-next-line
-      this.props.allProducts[this.props.allProducts.indexOf(this.props.adjustmentProduct)].adjustment=(parseInt(this.props.adjustmentProduct.adjustment)+parseInt(this.props.adjustmentQty))
+      this.props.allProducts[this.props.allProducts.indexOf(this.props.adjustmentProduct)].adjustment=(parseFloat(this.props.adjustmentProduct.adjustment)+parseFloat(this.props.adjustmentQty)).toFixed(2)
       this.props.updateAllProducts(this.props.allProducts)
       Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
     }).then(()=>{

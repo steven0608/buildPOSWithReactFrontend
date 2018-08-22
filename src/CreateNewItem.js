@@ -116,7 +116,7 @@ const CreateNewItem = (props) => {
       <input type="submit" value="Create New Item"/>
     </form>
     {props.image_url ? <img id="preview" src={props.image_url} height="222" width="332" alt="Please Click Upload"/> : null}
-    
+
   </div>)
 
 }

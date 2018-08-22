@@ -5,16 +5,27 @@ import Adapter from "./Adapter"
   class DisplayOrder extends Component {
 
    processReceiving=()=> {
-     console.log("try this",this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].received)
+     if (this.props.order.id) {
+     let date=0;
+     const today = new Date()
+       if(today.getMonth()<10){
+         date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+
+       }else {
+         date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+       }
+
      this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].on_order=false
      this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].received=true
      this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
+     this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].updated_at=date
        this.props.processFilterOrders(this.props.filterOrders)
 
 
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
+     this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].updated_at=date
        this.props.processAllOrders(this.props.allOrders)
        const url="http://localhost:3000/api/v1/orders/"+this.props.order.id
        const submissionBody={
@@ -31,16 +42,19 @@ import Adapter from "./Adapter"
            last_cost:this.props.order.price,
            most_recent_vendor:this.props.order.vendor_name,
          }
-         console.log(currentProduct.order)
-         console.log(this.props.order.qty)
-         // debugger;
+
+
          Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
          this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=parseFloat(currentProduct.order)+parseFloat(this.props.order.qty)
          this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty)
+         this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].last_cost=this.props.order.price
+         this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].most_recent_vendor=this.props.order.vendor_name
          this.props.updateAllProducts(this.props.allProducts)
        })
        this.forceUpdate()
-
+}else {
+    window.location.reload(true)
+}
    }
    render(){
    return(<div className="card">

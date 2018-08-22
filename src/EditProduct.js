@@ -4,6 +4,9 @@ import firebase from "firebase/app"
 import "firebase/storage"
 import Adapter from "./Adapter"
 import {connect} from "react-redux"
+import {Link} from 'react-router-dom'
+import MenuOption from "./MenuOption"
+import LogoutButton from "./LogoutButton"
 
 class EditProduct extends Component {
 
@@ -148,7 +151,7 @@ handleEditedItem=(event)=>{
     annualized_qty: this.state.annualized_qty,
     category: this.state.category,
     image_url: this.state.image_url,
-    last_edited_by: this.state.currentUser.username,
+    last_edited_by: this.props.currentUser.username,
     last_cost: this.state.last_cost,
     barcode: this.state.barcode,
     unit:this.state.unit,
@@ -166,7 +169,7 @@ handleEditedItem=(event)=>{
     this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].annualized_qty= this.state.annualized_qty
     this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].category= this.state.categor
     this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].image_url= this.state.image_url
-    this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].last_edited_by= this.state.currentUser.username
+    this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].last_edited_by= this.props.currentUser.username
     this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].last_cost= this.state.last_cost
     this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].barcode= this.state.barcode
     this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].unit= this.state.unit
@@ -178,52 +181,55 @@ handleEditedItem=(event)=>{
 
  render() {
 return (<div>
+  <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
+  <LogoutButton />
+  <MenuOption />
   <h1>Edit Item From</h1>
   <form onSubmit={this.handleEditedItem}>
-    <label>Item Name:
+    <p><label>Item Name:
       <input type="text" value={this.state.item_name} onChange={this.newItem_Name} required/></label>
-    <br></br>
-    <label>Retail Price:
+    </p>
+    <p><label>Retail Price:
       <input type="number" value={this.state.retail_price}  step="0.01" onChange={this.newRetailPrice} required/></label>
-    <br></br>
-    <label>Pomo Price:
+    </p>
+    <p><label>Pomo Price:
       <input type="number" value={this.state.pomo_price} step="0.01" onChange={this.newPomoPrice} required/></label>
-    <br></br>
-    <label>Last Cost:
+    </p>
+    <p><label>Last Cost:
       <input type="number" value={this.state.last_cost} step="0.01" onChange={this.newLastCost}required/></label>
-    <br></br>
-    <label>Most Recent Vendor:
+    </p>
+    <p><label>Most Recent Vendor:
       <input type="text" value={this.state.most_recent_vendor} onChange={this.newMostRecentVendor}required/></label>
-    <br></br>
-    <label>unit:
+    </p>
+    <p><label>unit:
       <input type="text" value={this.state.unit} onChange={this.newProductUnit}required/></label>
-    <br></br>
-    <label>Status:
+    </p>
+    <p><label>Status:
       <input type="text" value={this.state.status} onChange={this.newStatus}required/></label>
-    <br></br>
-    <label>Forecast Sales For The Next 3 Months:
+    </p>
+    <p><label>Forecast Sales For The Next 3 Months:
       <input type="text" value={this.state.forecast_sales_three_months} onChange={this.newForecast}/></label>
-    <br></br>
-    <label>Need To Order For The Next 3 Months:
+    </p>
+    <p><label>Need To Order For The Next 3 Months:
       <input type="text" value={this.state.need_to_order_for_next_three_months} onChange={this.newNeedToOrder}/></label>
-    <br></br>
-    <label>Annualized Sales:
+    </p>
+    <p><label>Annualized Sales:
       <input type="text" value={this.state.annualized_sales} onChange={this.newAnnualizedSales}/></label>
-    <br></br>
-    <label>annualized QTY:
+    </p>
+    <p><label>annualized QTY:
       <input type="text" value={this.state.annualized_qty} onChange={this.newAnnualizedQty}/></label>
-    <br></br>
-    <label>Upload Product Image:
-      <input type="file" onChange={this.newImage_url}/></label>
-    <button onClick={this.uploadHandler}>Upload</button>
-    <br></br>
-    <label>Category:
+    </p>
+      <p><label>Upload Product Image:
+    <input type="file" onChange={this.newImage_url}/></label>
+    <button onClick={this.uploadHandler} className="ui tiny teal button">Upload</button>
+    </p>
+    <p><label>Category:
       <input type="text" value={this.state.category} onChange={this.newCategory}required/></label>
-    <br></br>
-    <label>Barcode:
+    </p>
+    <p><label>Barcode:
       <input type="text" value={this.state.barcode} onChange={this.newBarcode}required/></label>
-    <br></br>
-    <input type="submit" value="Create New Item"/>
+    </p>
+    <input type="submit" value="Update Item"/>
   </form>
   <img id="preview" src={this.state.image_url} height="222" width="332" alt="Please Click Upload"/>
 </div>)
@@ -233,6 +239,7 @@ return (<div>
  function mapStateToProps(state) {
    return {
      allProducts: state.allProducts,
+     currentUser:state.currentUser,
  }
  }
 

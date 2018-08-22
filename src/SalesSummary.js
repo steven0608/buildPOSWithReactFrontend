@@ -12,7 +12,7 @@ const salesTotal=(month)=>{
   const initialValue = 0
   return monthlySales.reduce(function(acc, cur) {
     // eslint-disable-next-line
-    return parseInt(acc) + parseInt(cur.qty)
+    return parseFloat(acc) + parseFloat(cur.qty)
   }, initialValue)
 }
   return(

@@ -36,14 +36,17 @@ if (this.props.order.id) {
     const productUrl="http://localhost:3000/api/v1/products/"+this.props.order.product_id
     const currentProduct=this.props.allProducts.find(product=>product.id === this.props.order.product_id)
     const productSubmissionBody={
-      order:parseFloat(currentProduct.order) + parseFloat(this.props.order.qty),
-      inventory:parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty),
+      order:(parseFloat(currentProduct.order) + parseFloat(this.props.order.qty)).toFixed(2),
+      inventory:(parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty)).toFixed(2),
       last_cost:this.props.order.price,
       most_recent_vendor:this.props.order.vendor_name,
     }
     Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
-    this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=parseFloat(currentProduct.order) + parseFloat(this.props.order.qty)
-    this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty)
+    this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].order=(parseFloat(currentProduct.order) + parseFloat(this.props.order.qty)).toFixed(2)
+    this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].inventory=(parseFloat(currentProduct.inventory) + parseFloat(this.props.order.qty)).toFixed(2)
+    this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].last_cost=this.props.order.price
+    this.props.allProducts[this.props.allProducts.indexOf(currentProduct)].most_recent_vendor=this.props.order.vendor_name
+
     this.props.updateAllProducts(this.props.allProducts)
   })
 }else {
