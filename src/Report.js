@@ -5,6 +5,7 @@ import DisplayData from "./DisplayData"
 import UUID from "uuid"
 import MenuOption from "./MenuOption"
 import LogoutButton from "./LogoutButton"
+import Download from "./Download"
 
 class Report extends Component {
 
@@ -27,11 +28,13 @@ class Report extends Component {
       <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
       <LogoutButton />
       <MenuOption />
+      <div className="ui teal button"><Link to="/dashboard">See Dashboard</Link></div>
       <form onSubmit={this.filterData} className="center-SalesSummary">
         <label>From&nbsp;&nbsp;<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeFrom} onChange={(event) => this.props.changeDataRangeFrom(event)} required/></label>
         <label>&nbsp;&nbsp;To&nbsp;&nbsp;<input type="text" placeholder="YYYY-MM-DD" value={this.props.dateRangeTo} onChange={(event) => this.props.changeDataRangeTo(event)} required/></label>
         <input type="submit" value="Get Sales Data"/>
       </form>
+      <Download />
       {
         this.props.reportData.length === 0
           ? null
@@ -46,7 +49,7 @@ class Report extends Component {
                   <th>Pomo Price</th>
                   <th>Total</th>
                   <th>Saving</th>
-                  <th>Transcation Date</th>
+                  <th>Transaction Date</th>
                 </tr>
               </thead>
               <tbody>

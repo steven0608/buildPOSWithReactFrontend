@@ -12,7 +12,7 @@ const ShowAdjustments = (props)=> {
 
   function handleSearch(event) {
     props.handleAdjustmentSearchInput(event.target.value)
-    const showAdjustments=props.allAdjustments.filter(adjustment=>adjustment.reason_code.toLowerCase().includes(event.target.value.toLowerCase()))
+    const showAdjustments=props.adjustments.filter(adjustment=>adjustment.reason_code.toLowerCase().includes(event.target.value.toLowerCase()))
     props.handleFilterAdjustment(showAdjustments)
   }
 
@@ -32,7 +32,6 @@ const ShowAdjustments = (props)=> {
 
 function mapStateToProps(state) {
   return {
-    allAdjustments:state.allAdjustments,
     adjustmentSearchInput:state.adjustmentSearchInput,
     filterAdjustment:state.filterAdjustment
   }

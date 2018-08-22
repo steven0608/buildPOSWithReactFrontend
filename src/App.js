@@ -23,6 +23,7 @@ import ProductOrdersList from "./ProductOrdersList"
 import EditProduct from "./EditProduct"
 import ShowAdjustments from "./ShowAdjustments"
 import SalesSummary from "./SalesSummary"
+import SalesDashboard from "./SalesDashboard"
 
 // beautify has issue with exact path
 
@@ -72,7 +73,7 @@ class App extends Component {
     }
   }
   render() {
-    
+
     return (<Fragment>
 
       <Route exact path="/" render={(routerProps) => <Login {...routerProps}/>}/>
@@ -99,6 +100,7 @@ class App extends Component {
         <Route path="/createtask" component={CreateTask}/>
         <Route path="/createuser" component={CreateUser}/>
         <Route path="/alltasks" component={AllTasks}/>
+        <Route path="/dashboard" component={SalesDashboard}/>
         <Route path="/createnewitems" component={CreateNewItem}/>
         <Route path="/allorders" component={SeeAllOrders}/>
         <Route path="/products/:id/orders" render={(routerProps) => {
