@@ -53,14 +53,14 @@ class App extends Component {
     this.props.handleLogin(userinfo)
   }
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/products").then(r => r.json()).then(data => this.getAllProducts(data))
-    fetch("http://localhost:3000/api/v1/sales_transcations").then(r => r.json()).then(data => this.getAllSalesData(data))
-    fetch("http://localhost:3000/api/v1/products_sales").then(r => r.json()).then(data => this.getAllProductsSales(data))
-    fetch("http://localhost:3000/api/v1/adjustments").then(r=>r.json()).then(data => this.getAllAdjustment(data))
-    fetch("http://localhost:3000/api/v1/orders").then(r=>r.json()).then(data => this.getAllOrder(data))
+    fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/products").then(r => r.json()).then(data => this.getAllProducts(data))
+    fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/sales_transcations").then(r => r.json()).then(data => this.getAllSalesData(data))
+    fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/products_sales").then(r => r.json()).then(data => this.getAllProductsSales(data))
+    fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/adjustments").then(r=>r.json()).then(data => this.getAllAdjustment(data))
+    fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/orders").then(r=>r.json()).then(data => this.getAllOrder(data))
     let token = localStorage.getItem('token');
     if(token){
-      fetch("http://localhost:3000/api/v1/current_user",{
+      fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/current_user",{
         headers: {
           'Content-Type': 'application/json',
           Authorization: token

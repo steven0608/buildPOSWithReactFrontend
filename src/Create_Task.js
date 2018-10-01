@@ -22,7 +22,7 @@ class CreateTask extends Component {
       ...this.props.currentUser,
       currentUser: createdTasks
     })
-    const url = "http://localhost:3000/api/v1/todolists"
+    const url = "https://limitless-fjord-48119.herokuapp.com/api/v1/todolists"
     this.props.handleResetTaskToInput()
     this.props.handleResetTaskMessageInput()
     Adapter.fetchRequest(url, submissionBody, "POST").then(() => this.props.history.push("/profile"))

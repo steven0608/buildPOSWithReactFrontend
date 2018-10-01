@@ -14,7 +14,7 @@ class Order extends Component {
 
   createOpenOrder=(event)=> {
     event.preventDefault()
-    const url="http://localhost:3000/api/v1/orders"
+    const url="https://limitless-fjord-48119.herokuapp.com/api/v1/orders"
     const submissionBody={
       product_id:this.props.orderProduct.id,
       product_name:this.props.orderProduct.item_name,
@@ -32,7 +32,7 @@ class Order extends Component {
 
     Adapter.fetchRequest(url,submissionBody,"POST").then(()=>{
         const today = new Date()
-          if(today.getMonth()<10){
+          if(today.getMonth()<9){
             const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
                     submissionBody.created_at=date
             this.props.addNewOrder(submissionBody)
@@ -58,7 +58,7 @@ class Order extends Component {
   }
 
   handleBarcode = (event)=>{
-    console.log("barcode",this.props.allProducts)
+    // console.log("barcode",this.props.allProducts)
     this.props.searchBarcodeOrder(event.target.value)
     // eslint-disable-next-line
     const orderProduct=this.props.allProducts.find(product=>parseInt(product.barcode) === parseInt(event.target.value))
@@ -70,7 +70,7 @@ class Order extends Component {
   }
 
   render() {
-      console.log("check",this.props.allProducts)
+      // console.log("check",this.props.allProducts)
     return (<div>
       <Link to="/home"><i className="home icon big ui left floated teal"></i></Link>
       <LogoutButton />

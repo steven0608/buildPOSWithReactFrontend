@@ -9,11 +9,11 @@ const Checkout = (props) => {
       alert("Your change: " + (
       props.customerPay - props.checkoutTotalDollar).toFixed(2))
     }
-    fetch("http://localhost:3000/api/v1/sales_transcations").then(r => r.json()).then(data => {
+    fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/sales_transcations").then(r => r.json()).then(data => {
       // debugger;
       const findTranscations = data.find(transcation => transcation.user_id === props.currentUser.id && transcation.total_saving === null)
       const currentTransactionId = findTranscations.id
-      const url = "http://localhost:3000/api/v1/products_sales"
+      const url = "https://limitless-fjord-48119.herokuapp.com/api/v1/products_sales"
 
       let allItemSales=[]
       const today = new Date()
@@ -31,7 +31,7 @@ const Checkout = (props) => {
         }
 
 
-          if(today.getMonth()<10){
+          if(today.getMonth()<9){
             const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
                     submissionBody.created_at=date
                     props.addItemSale(submissionBody)
@@ -44,7 +44,7 @@ const Checkout = (props) => {
           }
 
 
-        const productUrl="http://localhost:3000/api/v1/products/"+item.id
+        const productUrl="https://limitless-fjord-48119.herokuapp.com/api/v1/products/"+item.id
         let productSubmissionBody = {
           inventory:item.inventory-item.checkoutqty,
           sales:parseFloat(item.sales)+parseFloat(item.checkoutqty)
@@ -59,7 +59,7 @@ const Checkout = (props) => {
       })
 
 
-      const transcationUrl = "http://localhost:3000/api/v1/sales_transcations/" + currentTransactionId
+      const transcationUrl = "https://limitless-fjord-48119.herokuapp.com/api/v1/sales_transcations/" + currentTransactionId
       const updateTransaction = {
         total: props.checkoutTotalDollar,
         total_saving: props.checkoutTotalSaving,
@@ -70,7 +70,7 @@ const Checkout = (props) => {
       Adapter.fetchRequest(transcationUrl, updateTransaction, "PATCH")
       updateTransaction.products_sales=allItemSales
 
-      if(today.getMonth()<10){
+      if(today.getMonth()<9){
         const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
                 updateTransaction.created_at=date
                 props.addProductSale(updateTransaction)

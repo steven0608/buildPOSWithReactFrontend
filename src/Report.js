@@ -1,27 +1,46 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
-import DisplayData from "./DisplayData"
 import UUID from "uuid"
 import MenuOption from "./MenuOption"
 import LogoutButton from "./LogoutButton"
 import Download from "./Download"
+import DisplayProductSale from "./DisplayProductSale"
 
 class Report extends Component {
 
   filterData = (event) => {
     event.preventDefault()
+  //
+  //   if(this.props.dateRangeTo.slice(0, 4) === this.props.dateRangeFrom.slice(0, 4)){
+  //
+  //     // console.log(this.props.allProductsSales)
+  //   const reportDatamonth = this.props.allProductsSales.filter(data => {
+  //     return data.created_at.slice(0, 4) === this.props.dateRangeFrom.slice(0, 4) && data.created_at.slice(5, 7) >= this.props.dateRangeFrom.slice(5, 7) && data.created_at.slice(5, 7) <= this.props.dateRangeTo.slice(5, 7)})
+  //     console.log(reportDatamonth)
+  //
+  //
+  //   const reportData = reportDatamonth.filter(data => !((data.created_at.slice(8, 10) > this.props.dateRangeTo.slice(8, 10) && data.created_at.slice(5, 7)===this.props.dateRangeTo.slice(5, 7)) || (data.created_at.slice(8, 10) < this.props.dateRangeFrom.slice(8, 10) && data.created_at.slice(5, 7)===this.props.dateRangeFrom.slice(5, 7))))
+  //     console.log(reportData)
+  //   // debugger;
+  //   this.props.filterSalesData(reportData)
+  //
+  // }else{
+  //
+  //   const reportDataYear = this.props.allProductsSales.filter(data => data.created_at.slice(0, 4) >= this.props.dateRangeFrom.slice(0, 4) && data.created_at.slice(0, 4) <= this.props.dateRangeTo.slice(0, 4))
+  //   const reportData = reportDataYear.filter(data=>!(data.created_at.slice(0, 4) === this.props.dateRangeTo.slice(0, 4) && data.created_at.slice(5, 7) > this.props.dateRangeTo.slice(5, 7) && data.created_at.slice(8, 10) > this.props.dateRangeTo.slice(8, 10)))
+  //   this.props.filterSalesData(reportData)
+  //
+  // }
 
-    if(this.props.dateRangeTo.slice(0, 4) === this.props.dateRangeFrom.slice(0, 4)){
-    const reportDatamonth = this.props.allSalesData.filter(data => data.created_at.slice(0, 4) >= this.props.dateRangeFrom.slice(0, 4) && data.created_at.slice(0, 4) <= this.props.dateRangeTo.slice(0, 4) && data.created_at.slice(5, 7) >= this.props.dateRangeFrom.slice(5, 7) && data.created_at.slice(5, 7) <= this.props.dateRangeTo.slice(5, 7))
-    const reportData = reportDatamonth.filter(data => !(data.created_at.slice(5, 7) === this.props.dateRangeTo.slice(5, 7) && data.created_at.slice(8, 10) > this.props.dateRangeTo.slice(8, 10)))
-    this.props.filterSalesData(reportData)
-  }else{
-    const reportDataYear = this.props.allSalesData.filter(data => data.created_at.slice(0, 4) >= this.props.dateRangeFrom.slice(0, 4) && data.created_at.slice(0, 4) <= this.props.dateRangeTo.slice(0, 4))
-    const reportData = reportDataYear.filter(data=>!(data.created_at.slice(0, 4) === this.props.dateRangeTo.slice(0, 4) && data.created_at.slice(5, 7) > this.props.dateRangeTo.slice(5, 7) && data.created_at.slice(8, 10) > this.props.dateRangeTo.slice(8, 10)))
+  if(new Date(this.props.dateRangeFrom)<= new Date(this.props.dateRangeTo)){
+        const reportData = this.props.allProductsSales.filter(sale=>new Date(sale.created_at.slice(0,10))<=new Date(this.props.dateRangeTo) && new Date(sale.created_at.slice(0,10))>=new Date(this.props.dateRangeFrom))
+        this.props.filterSalesData(reportData)
+
+  }else {
+    const reportData = []
     this.props.filterSalesData(reportData)
   }
-
   }
   render() {
     return (<div>
@@ -54,12 +73,7 @@ class Report extends Component {
               </thead>
               <tbody>
                 {
-                  this.props.reportData.map(saleTransaction =>< DisplayData data = {
-                    saleTransaction
-                  }
-                  key = {
-                    UUID()
-                  } />)
+                  this.props.reportData.map(product => <DisplayProductSale productSale={product} key={UUID()}/>)
                 }
               </tbody>
             </table>
@@ -70,7 +84,7 @@ class Report extends Component {
 }
 
 function mapStateToProps(state) {
-  return {allSalesData: state.allSalesData, dateRangeFrom: state.dateRangeFrom, dateRangeTo: state.dateRangeTo, reportData: state.reportData}
+  return {allProductsSales: state.allProductsSales, dateRangeFrom: state.dateRangeFrom, dateRangeTo: state.dateRangeTo, reportData: state.reportData}
 }
 
 function mapDispatchToProps(dispatch) {

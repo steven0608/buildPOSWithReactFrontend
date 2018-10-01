@@ -10,7 +10,7 @@ const SeeAllOrders=(props)=>{
 
 
 function handleRadioButton(event) {
-  console.log("just want to check")
+  // console.log("just want to check")
   props.inputFilterOption(event.target.value)
   if(event.target.value === "All Order"){
       props.filterOrderList(props.allOrders)

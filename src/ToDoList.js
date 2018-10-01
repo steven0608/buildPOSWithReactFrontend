@@ -10,7 +10,7 @@ const ToDoList = (props) => {
     const submissionBody = {
       task_completed: !props.todolist.task_completed
     }
-    const url = "http://localhost:3000/api/v1/todolists/" + props.todolist.id
+    const url = "https://limitless-fjord-48119.herokuapp.com/api/v1/todolists/" + props.todolist.id
     Adapter.fetchRequest(url, submissionBody, "PATCH").then(() => {
       props.toDoLists[props.toDoLists.indexOf(props.todolist)].task_completed = !props.todolist.task_completed
       const user_todolist = props.currentUser.todolists.find(toDoList => toDoList.id === props.todolist.id)

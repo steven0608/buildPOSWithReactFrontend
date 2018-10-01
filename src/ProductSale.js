@@ -11,9 +11,9 @@ class ProductSale extends Component {
     // eslint-disable-next-line
     let qtyInput;
     if(parseFloat(event.target.value)){
-      console.log(event.target.value)
+
       qtyInput=parseFloat(event.target.value)
-      console.log(parseFloat(event.target.value))
+      // console.log(parseFloat(event.target.value))
     }else {
       qtyInput=0
     }

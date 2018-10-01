@@ -21,7 +21,7 @@ class CreateUser extends Component {
       status: this.props.newUser_status,
     }
 
-    const url = "http://localhost:3000/api/v1/users"
+    const url = "https://limitless-fjord-48119.herokuapp.com/api/v1/users"
     Adapter.fetchRequest(url, submissionBody, "POST")
     this.props.history.push("/profile")
   }

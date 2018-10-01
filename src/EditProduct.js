@@ -156,7 +156,7 @@ handleEditedItem=(event)=>{
     barcode: this.state.barcode,
     unit:this.state.unit,
   }
-  const url = "http://localhost:3000/api/v1/products"+this.props.product.id
+  const url = "https://limitless-fjord-48119.herokuapp.com/api/v1/products/"+this.props.product.id
   Adapter.fetchRequest(url, submissionBody, "PATCH").then(() => {
     this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].item_name= this.state.item_name
     this.props.allProducts[this.props.allProducts.indexOf(this.props.product)].retail_price= this.state.retail_price

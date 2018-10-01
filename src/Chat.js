@@ -36,7 +36,7 @@ class Chat extends Component {
 
     chatManager.connect().then(currentUser => {
       this.currentUser = currentUser
-      console.log(this.currentUser)
+      // console.log(this.currentUser)
       this.getRooms()
     }).catch(err => console.log('error on connecting: ', err))
   }
@@ -75,7 +75,7 @@ class Chat extends Component {
       roomId: roomId,
       hooks: {
         onNewMessage: message => {
-          console.log("check this out", message)
+          // console.log("check this out", message)
           this.setState({
             messages: [
               ...this.state.messages,

@@ -13,7 +13,7 @@ class Pos extends Component {
 
   currentTransaction = () => {
     this.props.disableDeleteButton()
-    const url = "http://localhost:3000/api/v1/sales_transcations"
+    const url = "https://limitless-fjord-48119.herokuapp.com/api/v1/sales_transcations"
     const submissionBody = {
       user_id: this.props.currentUser.id
     }

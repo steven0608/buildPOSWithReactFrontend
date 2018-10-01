@@ -20,7 +20,7 @@ const AllTasks = (props) => {
       todolists: newToDoLists
     }
     props.deleteTask(UpdateCurrentUser)
-    const url = "http://localhost:3000/api/v1/todolists/" + event.target.name
+    const url = "https://limitless-fjord-48119.herokuapp.com/api/v1/todolists/" + event.target.name
     Adapter.deleteRequest(url, "DELETE")
   }
 
@@ -35,7 +35,7 @@ const AllTasks = (props) => {
     <ul className="ui cards">
     {
       props.currentUser.todolists.map(todolist => <div className="card" key={UUID()}><ToDoList todolist={todolist} name="allTasks"/>
-        <button className="ui bottom attached button" name={todolist.id} onClick={handleDeleteTask}><i class="trash alternate icon"></i> Delete</button>
+        <button className="ui bottom attached button" name={todolist.id} onClick={handleDeleteTask}><i className="trash alternate icon"></i> Delete</button>
       </div>)
     }
   </ul>

@@ -11,7 +11,7 @@ class ProfilePage extends Component {
 
   addTodoList = (data) => {
     // console.log("checking",data)
-    console.log("username", this.props.currentUser)
+    // console.log("username", this.props.currentUser)
     const user_Todolists = data.filter(todolist => {
       return todolist.to_username.toLowerCase() === this.props.currentUser.username.toLowerCase()
     })
@@ -20,7 +20,7 @@ class ProfilePage extends Component {
     // console.log("to do List", user_Todolists)
   }
   componentDidMount() {
-    fetch("http://localhost:3000//api/v1/todolists").then(r => r.json()).then(data => this.addTodoList(data))
+    fetch("https://limitless-fjord-48119.herokuapp.com//api/v1/todolists").then(r => r.json()).then(data => this.addTodoList(data))
   }
 
   handleCreateTask = () => {
@@ -34,7 +34,7 @@ class ProfilePage extends Component {
 
   handleSubmitQuote=(event)=>{
     event.preventDefault()
-    const url="http://localhost:3000/api/v1/users/"+this.props.currentUser.id
+    const url="https://limitless-fjord-48119.herokuapp.com/api/v1/users/"+this.props.currentUser.id
     const submissionBody={
       quote:this.props.quoteInput
     }

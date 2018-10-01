@@ -18,8 +18,7 @@ class Download extends React.Component {
 
       handleReportData =()=>{
         let dataArray=[]
-        this.props.reportData.forEach(transcation=>{
-          return transcation.products_sales.forEach(sale=>{
+        this.props.reportData.forEach(sale=>{
             let data = {name:sale.product_name,
               qty:sale.qty,
               sellingPrice:sale.retail_price,
@@ -29,7 +28,7 @@ class Download extends React.Component {
               date:sale.created_at.slice(0,10),
             }
              dataArray.push(data)
-})})
+})
 return dataArray
 }
 

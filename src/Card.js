@@ -62,7 +62,11 @@ onOrder =() => {
                 <li>Category: {this.props.product.category}</li>
                 <li>Last Edited by: {this.props.product.last_edited_by}</li>
                 <li>Barcode: {this.props.product.barcode}</li>
+                {this.props.product.id ?
                 <button><Link to={"/products/"+this.props.product.id+"/edit"}>Click To Edit</Link></button>
+                :
+                <div className="ui red message">Please Refresh the page to Edit this item</div>
+              }
               </ul>
         }
       </div>

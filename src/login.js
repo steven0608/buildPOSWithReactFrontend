@@ -13,7 +13,7 @@ class Login extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     // check this
-    // fetch("http://localhost:3000/api/v1/users").then(r => r.json()).then(data => this.getUserFromApi(data))
+    // fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/users").then(r => r.json()).then(data => this.getUserFromApi(data))
 
     const submissionBody ={
       username:this.props.usernameInput,
@@ -27,7 +27,7 @@ class Login extends Component {
       body: JSON.stringify(submissionBody)
     }
 
-    fetch("http://localhost:3000/api/v1/login",confi).then(r=>r.json()).then(data=>{
+    fetch("https://limitless-fjord-48119.herokuapp.com/api/v1/login",confi).then(r=>r.json()).then(data=>{
       // debugger;
         localStorage.setItem('token', data.token)
         this.getUserFromApi(data.user_details,data.todolists)

@@ -8,7 +8,7 @@ import Adapter from "./Adapter"
      if (this.props.order.id) {
      let date=0;
      const today = new Date()
-       if(today.getMonth()<10){
+       if(today.getMonth()<9){
          date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
 
        }else {
@@ -27,14 +27,14 @@ import Adapter from "./Adapter"
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].updated_at=date
        this.props.processAllOrders(this.props.allOrders)
-       const url="http://localhost:3000/api/v1/orders/"+this.props.order.id
+       const url="https://limitless-fjord-48119.herokuapp.com/api/v1/orders/"+this.props.order.id
        const submissionBody={
          on_order:false,
          received:true,
          received_by:this.props.currentUser.username
        }
        Adapter.fetchRequest(url,submissionBody,"PATCH").then(()=>{
-         const productUrl="http://localhost:3000/api/v1/products/"+this.props.order.product_id
+         const productUrl="https://limitless-fjord-48119.herokuapp.com/api/v1/products/"+this.props.order.product_id
          const currentProduct=this.props.allProducts.find(product=>product.id === this.props.order.product_id)
          const productSubmissionBody={
            order:parseFloat(currentProduct.order)+parseFloat(this.props.order.qty),

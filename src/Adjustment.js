@@ -24,7 +24,7 @@ class Adjustment extends Component {
 
   handleAdjustment = (event)=>{
     event.preventDefault()
-    const url= "http://localhost:3000/api/v1/adjustments"
+    const url= "https://limitless-fjord-48119.herokuapp.com/api/v1/adjustments"
     const submissionBody={
       reason_code:this.props.adjustmenntReasonCode,
       product_id:this.props.adjustmentProduct.id,
@@ -35,14 +35,14 @@ class Adjustment extends Component {
       total_dollars:this.props.adjustmentQty*this.props.adjustmentProduct.last_cost
     }
     Adapter.fetchRequest(url,submissionBody,"POST").then(()=>{
-      const productUrl="http://localhost:3000/api/v1/products/"+this.props.adjustmentProduct.id
+      const productUrl="https://limitless-fjord-48119.herokuapp.com/api/v1/products/"+this.props.adjustmentProduct.id
       const productSubmissionBody={
 
         inventory:(parseFloat(this.props.adjustmentProduct.inventory)+parseFloat(this.props.adjustmentQty)).toFixed(2),
 
         adjustment:(parseFloat(this.props.adjustmentProduct.adjustment)+parseFloat(this.props.adjustmentQty)).toFixed(2),
       }
-      console.log("check",this.props.allProducts.indexOf(this.props.adjustmentProduct))
+      // console.log("check",this.props.allProducts.indexOf(this.props.adjustmentProduct))
       // eslint-disable-next-line
       this.props.allProducts[this.props.allProducts.indexOf(this.props.adjustmentProduct)].inventory=(parseFloat(this.props.adjustmentProduct.inventory)+parseFloat(this.props.adjustmentQty)).toFixed(2)
       // eslint-disable-next-line
@@ -51,10 +51,10 @@ class Adjustment extends Component {
       Adapter.fetchRequest(productUrl,productSubmissionBody,"PATCH")
     }).then(()=>{
         const today = new Date()
-        if(today.getMonth()<10){
+        if(today.getMonth()<9){
           const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
                   submissionBody.created_at=date
-                  console.log("check this",submissionBody)
+                  // console.log("check this",submissionBody)
                   this.props.updateAllAdjustments(submissionBody)
                   this.props.createAdjustmentProduct("")
                   this.props.searchBarcodeAdjustment("")
