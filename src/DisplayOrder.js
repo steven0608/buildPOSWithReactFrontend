@@ -9,10 +9,20 @@ import Adapter from "./Adapter"
      let date=0;
      const today = new Date()
        if(today.getMonth()<9){
-         date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+         if(today.getDate()<10){
+           date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+         }else {
+           date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+         }
+
 
        }else {
-         date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+         if (today.getDate()<10) {
+           date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+         }else {
+           date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+         }
+
        }
 
      this.props.filterOrders[this.props.filterOrders.indexOf(this.props.order)].on_order=false

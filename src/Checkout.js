@@ -32,15 +32,32 @@ const Checkout = (props) => {
 
 
           if(today.getMonth()<9){
-            const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+            if(today.getDate()<10){
+              const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+                      submissionBody.created_at=date
+                      props.addItemSale(submissionBody)
+                      allItemSales.push(submissionBody)
+            }else {
+              const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                      submissionBody.created_at=date
+                      props.addItemSale(submissionBody)
+                      allItemSales.push(submissionBody)
+            }
+
+          }else {
+            if(today.getDate()<10){
+              const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
                     submissionBody.created_at=date
                     props.addItemSale(submissionBody)
                     allItemSales.push(submissionBody)
-          }else {
-            const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
-                  submissionBody.created_at=date
-                  props.addItemSale(submissionBody)
-                  allItemSales.push(submissionBody)
+            }else {
+              const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                    submissionBody.created_at=date
+                    props.addItemSale(submissionBody)
+                    allItemSales.push(submissionBody)
+            }
+
+
           }
 
 
@@ -71,13 +88,27 @@ const Checkout = (props) => {
       updateTransaction.products_sales=allItemSales
 
       if(today.getMonth()<9){
-        const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+        if (today.getDate()<10) {
+          const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+                  updateTransaction.created_at=date
+                  props.addProductSale(updateTransaction)
+        } else {
+          const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                  updateTransaction.created_at=date
+                  props.addProductSale(updateTransaction)
+        }
+
+      }else {
+        if (today.getDate()<10) {
+          const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
                 updateTransaction.created_at=date
                 props.addProductSale(updateTransaction)
-      }else {
-        const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
-              updateTransaction.created_at=date
-              props.addProductSale(updateTransaction)
+        } else {
+          const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                updateTransaction.created_at=date
+                props.addProductSale(updateTransaction)
+        }
+
       }
     }).then(() => {
       props.resetCheckoutItems()

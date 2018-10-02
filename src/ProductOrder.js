@@ -9,21 +9,43 @@ handleClickOrder=()=>{
 if (this.props.order.id) {
   const today = new Date()
   if(today.getMonth()<9){
-  const ReceivedDate=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
-  this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
-  this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
-  this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
-  this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].updated_at=ReceivedDate
-    this.props.processAllOrders(this.props.allOrders)
-    this.forceUpdate()
+    if (today.getDate()<10) {
+      const ReceivedDate=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
+      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
+      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
+      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].updated_at=ReceivedDate
+        this.props.processAllOrders(this.props.allOrders)
+        this.forceUpdate()
+    } else {
+      const ReceivedDate=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
+      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
+      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
+      this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].updated_at=ReceivedDate
+        this.props.processAllOrders(this.props.allOrders)
+        this.forceUpdate()
+    }
+
 }else{
-  const ReceivedDate=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
-  this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
-  this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
-  this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
-  this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].updated_at=ReceivedDate
-    this.props.processAllOrders(this.props.allOrders)
-    this.forceUpdate()
+  if (today.getDate()<10) {
+    const ReceivedDate=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+    this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
+    this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
+    this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
+    this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].updated_at=ReceivedDate
+      this.props.processAllOrders(this.props.allOrders)
+      this.forceUpdate()
+  } else {
+    const ReceivedDate=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+    this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].on_order=false
+    this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received=true
+    this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].received_by=this.props.currentUser.username
+    this.props.allOrders[this.props.allOrders.indexOf(this.props.order)].updated_at=ReceivedDate
+      this.props.processAllOrders(this.props.allOrders)
+      this.forceUpdate()
+  }
+
 }
   const url="https://limitless-fjord-48119.herokuapp.com/api/v1/orders/"+this.props.order.id
   const submissionBody={

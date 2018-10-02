@@ -52,25 +52,47 @@ class Adjustment extends Component {
     }).then(()=>{
         const today = new Date()
         if(today.getMonth()<9){
-          const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+          if(today.getDate()<10){
+            const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+                    submissionBody.created_at=date
+                    // console.log("check this",submissionBody)
+                    this.props.updateAllAdjustments(submissionBody)
+                    this.props.createAdjustmentProduct("")
+                    this.props.searchBarcodeAdjustment("")
+                    this.props.adjustQty("")
+                    this.props.adjustmentReason("")
+
+          }else {
+            const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                    submissionBody.created_at=date
+                    // console.log("check this",submissionBody)
+                    this.props.updateAllAdjustments(submissionBody)
+                    this.props.createAdjustmentProduct("")
+                    this.props.searchBarcodeAdjustment("")
+                    this.props.adjustQty("")
+                    this.props.adjustmentReason("")
+          }
+        }else {
+          if(today.getDate()<10){
+            const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
                   submissionBody.created_at=date
-                  // console.log("check this",submissionBody)
                   this.props.updateAllAdjustments(submissionBody)
+                  console.log("check this",submissionBody)
                   this.props.createAdjustmentProduct("")
                   this.props.searchBarcodeAdjustment("")
                   this.props.adjustQty("")
                   this.props.adjustmentReason("")
+          }else {
+            const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                  submissionBody.created_at=date
+                  this.props.updateAllAdjustments(submissionBody)
+                  console.log("check this",submissionBody)
+                  this.props.createAdjustmentProduct("")
+                  this.props.searchBarcodeAdjustment("")
+                  this.props.adjustQty("")
+                  this.props.adjustmentReason("")
+          }
 
-
-        }else {
-          const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
-                submissionBody.created_at=date
-                this.props.updateAllAdjustments(submissionBody)
-                console.log("check this",submissionBody)
-                this.props.createAdjustmentProduct("")
-                this.props.searchBarcodeAdjustment("")
-                this.props.adjustQty("")
-                this.props.adjustmentReason("")
         }
     })
   }

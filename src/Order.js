@@ -33,23 +33,47 @@ class Order extends Component {
     Adapter.fetchRequest(url,submissionBody,"POST").then(()=>{
         const today = new Date()
           if(today.getMonth()<9){
-            const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
-                    submissionBody.created_at=date
-            this.props.addNewOrder(submissionBody)
-            this.props.createOrderProduct("")
-            this.props.searchBarcodeOrder("")
-            this.props.placeOrderQTY("")
-            this.props.placeOrderPrice("")
-            this.props.placeOrderVendor("")
+            if (today.getDate()<10) {
+              const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+                      submissionBody.created_at=date
+              this.props.addNewOrder(submissionBody)
+              this.props.createOrderProduct("")
+              this.props.searchBarcodeOrder("")
+              this.props.placeOrderQTY("")
+              this.props.placeOrderPrice("")
+              this.props.placeOrderVendor("")
+            } else {
+              const date=today.getFullYear().toString()+"-0" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                      submissionBody.created_at=date
+              this.props.addNewOrder(submissionBody)
+              this.props.createOrderProduct("")
+              this.props.searchBarcodeOrder("")
+              this.props.placeOrderQTY("")
+              this.props.placeOrderPrice("")
+              this.props.placeOrderVendor("")
+            }
+
           }else {
-            const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
-                  submissionBody.created_at=date
-            this.props.addNewOrder(submissionBody)
-            this.props.createOrderProduct("")
-            this.props.searchBarcodeOrder("")
-            this.props.placeOrderQTY("")
-            this.props.placeOrderPrice("")
-            this.props.placeOrderVendor("")
+            if (today.getDate()<10) {
+              const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-0"+today.getDate().toString()
+                    submissionBody.created_at=date
+              this.props.addNewOrder(submissionBody)
+              this.props.createOrderProduct("")
+              this.props.searchBarcodeOrder("")
+              this.props.placeOrderQTY("")
+              this.props.placeOrderPrice("")
+              this.props.placeOrderVendor("")
+            } else {
+              const date=today.getFullYear().toString()+"-" + (today.getMonth()+1).toString()+"-"+today.getDate().toString()
+                    submissionBody.created_at=date
+              this.props.addNewOrder(submissionBody)
+              this.props.createOrderProduct("")
+              this.props.searchBarcodeOrder("")
+              this.props.placeOrderQTY("")
+              this.props.placeOrderPrice("")
+              this.props.placeOrderVendor("")
+            }
+
           }
 
 
