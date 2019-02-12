@@ -67,6 +67,7 @@ import Adapter from "./Adapter"
 }
    }
    render(){
+
    return(<div className="card">
    <div className="image" id="center-order-card">
    <span></span>

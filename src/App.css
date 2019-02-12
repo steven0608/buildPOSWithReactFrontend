@@ -75,3 +75,15 @@ html, body{
   margin-left:auto;
   margin-right:auto;
 }
+
+
+@media only screen and (max-width: 532px) {
+  .ui.four.cards {
+    display: block;
+  }
+  .ui.four.cards>.card {
+    width: calc(100% - 1.5em);
+    margin-left: .75em;
+    margin-right: .75em;
+  }
+}
