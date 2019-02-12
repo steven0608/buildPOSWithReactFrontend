@@ -1,5 +1,5 @@
 ### Please check out my Demo : https://mod5project-35643.firebaseapp.com/
-### video: https://www.useloom.com/share/d419004501fa46b38a7db6c687e2db34  (it's best to use 2X speed since i talked slow)
+### video: https://www.useloom.com/share/d419004501fa46b38a7db6c687e2db34  (it's recommended to use 2X speed since i talked slow)
 
 
 Admin has all features.
